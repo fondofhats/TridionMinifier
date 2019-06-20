@@ -8,6 +8,7 @@ using Yahoo.Yui.Compressor;
 
 // Adjust the below target folder.
 // [assembly: TcmTargetFolder("/webdav/Adjust%20This%20Target%20Folder")]
+// Modified
 [assembly: TcmTemplateTitle("TridionMinifier - Assembly")]
 namespace TridionMinifier
 {
