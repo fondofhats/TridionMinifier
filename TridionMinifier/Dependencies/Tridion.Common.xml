@@ -1,0 +1,1906 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tridion.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Tridion.Collections.ISet`1">
+            <summary>
+            Represents an unordered collection of unique items.
+            </summary>
+            <typeparam name="T">The type of the objects in the set.</typeparam>
+        </member>
+        <member name="T:Tridion.Collections.Set`1">
+            <summary>
+            Represents an unordered collection of unique items.
+            </summary>
+            <typeparam name="T">The type of the objects in the set.</typeparam>
+        </member>
+        <member name="M:Tridion.Collections.Set`1.Add(`0)">
+            <summary>
+            Adds an item to the <see cref="T:Tridion.Collections.ISet`1"/>.
+            </summary>
+            <param name="item">The object to add to the <see cref="T:Tridion.Collections.ISet`1"/>.</param>
+        </member>
+        <member name="M:Tridion.Collections.Set`1.Clear">
+            <summary>
+            Removes all items from the <see cref="T:Tridion.Collections.ISet`1"/>.
+            </summary>
+        </member>
+        <member name="M:Tridion.Collections.Set`1.Contains(`0)">
+            <summary>
+            Determines whether the <see cref="T:Tridion.Collections.ISet`1"/> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:Tridion.Collections.ISet`1"/>.</param>
+            <returns>True if item is found in the ISet; otherwise, false. </returns>
+            <remarks>Set requires an equality implementation to determine whether keys are equal. The default generic equality comparer EqualityComparer.Default is used. If type Item implements the System.IEquatable generic interface, the default equality comparer uses that implementation.</remarks>
+        </member>
+        <member name="M:Tridion.Collections.Set`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:Tridion.Collections.ISet`1"/> to an Array, starting at a particular Array index. 
+            </summary>
+            <param name="array">The one-dimensional Array that is the destination of the elements copied from <see cref="T:Tridion.Collections.ISet`1"/>. The Array must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+        </member>
+        <member name="M:Tridion.Collections.Set`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:Tridion.Collections.ISet`1"/>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:Tridion.Collections.ISet`1"/>.</param>
+            <returns>True if item was successfully removed from the <see cref="T:Tridion.Collections.ISet`1"/>; otherwise, false. This method also returns false if item is not found in the original <see cref="T:Tridion.Collections.ISet`1"/>.</returns>
+        </member>
+        <member name="M:Tridion.Collections.Set`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the <see cref="T:Tridion.Collections.ISet`1"/>.
+            </summary>
+            <returns>A IEnumerator that can be used to iterate through the <see cref="T:Tridion.Collections.ISet`1"/>.</returns>
+        </member>
+        <member name="M:Tridion.Collections.Set`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a <see cref="T:Tridion.Collections.ISet`1"/>.
+            </summary>
+            <returns>An IEnumerator object that can be used to iterate through the <see cref="T:Tridion.Collections.ISet`1"/>.</returns>
+        </member>
+        <member name="P:Tridion.Collections.Set`1.Count">
+            <summary>
+            Gets the number of elements contained in the ISet.
+            </summary>
+        </member>
+        <member name="P:Tridion.Collections.Set`1.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Tridion.Collections.ISet`1"/> is read-only.
+            </summary>
+        </member>
+        <member name="T:Tridion.CommonUtilities">
+            <summary>
+            Contains utility methods.
+            </summary>
+        </member>
+        <member name="M:Tridion.CommonUtilities.AssertArgumentNotNull(System.Object,System.String)">
+            <summary>
+            Raises a TridionArgumentNullException if the value of a given parameter is null.
+            </summary>
+            <param name="paramValue">The parameter value</param>
+            <param name="paramName">The parameter name (used in exception message)</param>
+        </member>
+        <member name="T:Tridion.Configuration.ApplicationMonitoringSettings">
+            <summary>
+            Represents application monitoring setting within a configuration file.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.ApplicationMonitoringSettings.MonitoringAgentUdpPort">
+            <summary>
+            Gets or sets the UDP port service heartbeats should be send to.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.ApplicationMonitoringSettings.AutomaticServiceHeartbeatInterval">
+            <summary>
+            Sets the interval between service heartbeats when using automatic service heartbeats. The interval is specified in seconds. It must be set to one second or more, and can not exceed one week.
+            </summary>
+            <remarks>The service process timeout will be set to 2.3 times the heartbeat interval to ensure a single lost heartbeat will not result in a timeout.</remarks>
+        </member>
+        <member name="T:Tridion.ApplicationMonitoring.ComWrapper.IHeartbeatGenerator">
+            <summary>
+            The COM interface for the Service Heartbeat implementation
+            </summary>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.ComWrapper.IHeartbeatGenerator.StartAutomaticServiceHeartbeat">
+            <summary>
+            Start automatically raising service heartbeats at the specified interval until the process terminates.
+            </summary>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.ComWrapper.IHeartbeatGenerator.RegisterThreadHeartbeat(System.Int32,System.String,System.Int32)">
+            <summary>
+            Raise a heartbeat for the specified thread.
+            </summary>
+            <param name="threadId">The thread id.</param>
+            <param name="threadName">The name of the thread, or null if the name is not relevant.</param>
+            <param name="threadHeartbeatTimeout">The timeout in seconds before the next heartbeat will be raised from the thread. If this time is exeeded the thread will be considered hanging.</param>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.ComWrapper.IHeartbeatGenerator.RegisterThreadTerminating(System.Int32)">
+            <summary>
+            Signals the specified thread is terminating and no further heartbearts will be send.
+            </summary>
+            <param name="threadId">The thread id.</param>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.ComWrapper.IHeartbeatGenerator.ServiceType">
+            <summary>
+            Gets or sets the service type. The default value is the process name.
+            </summary>
+            <example>
+            ServiceType = "Publisher";
+            </example>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.ComWrapper.IHeartbeatGenerator.ServiceInstance">
+            <summary>
+            Sets or gets the instance name for this specific service. This is used when multiple instances of a service can run on the same system.
+            </summary>
+        </member>
+        <member name="T:Tridion.ApplicationMonitoring.ComWrapper.HeartbeatGeneratorFacade">
+            <summary>
+            Provides a COM class for the HeartbeatGenerator singleton class
+            </summary>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.ComWrapper.HeartbeatGeneratorFacade.StartAutomaticServiceHeartbeat">
+            <summary>
+            Start automatically raising service heartbeats at the specified interval until the process terminates.
+            </summary>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.ComWrapper.HeartbeatGeneratorFacade.RegisterThreadHeartbeat(System.Int32,System.String,System.Int32)">
+            <summary>
+            Raise a heartbeat for the specified thread.
+            </summary>
+            <param name="threadId">The thread id.</param>
+            <param name="threadName">The name of the thread, or null if the name is not relevant.</param>
+            <param name="threadHeartbeatTimeout">The timeout in seconds before the next heartbeat will be raised from the thread. If this time is exeeded the thread will be considered hanging.</param>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.ComWrapper.HeartbeatGeneratorFacade.RegisterThreadTerminating(System.Int32)">
+            <summary>
+            Signals the specified thread is terminating and no furhter heartbearts will be send.
+            </summary>
+            <param name="threadId">The thread id.</param>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.ComWrapper.HeartbeatGeneratorFacade.ServiceType">
+            <summary>
+            Gets or sets the service type. The default value is the process name.
+            </summary>
+            <example>
+            ServiceType = "Publisher";
+            </example>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.ComWrapper.HeartbeatGeneratorFacade.ServiceInstance">
+            <summary>
+            Sets or gets the instance name for this specific service. This is used when multiple instances of a service can run on the same system.
+            </summary>
+        </member>
+        <member name="T:Tridion.ApplicationMonitoring.HeartbeatGenerator">
+            <summary>
+            Used to generate service and thread heartbeats used for application monitoring.
+            </summary>
+            <remarks>
+            The HeartbeatGenerator will automatically create a background thread sending the service
+            heartbeats. It is then the responsibilty of the monitored service to ensure each monitored
+            thread issues it's own thread heartbeat to the HeartbeatGenerator
+            <example>
+            As soon as the service is started the service heartbeats should be configured and started:
+            <code>
+            HeartbeatGenerator.ServiceType = "Your Service";
+            HeartbeatGenerator.StartAutomaticServiceHeartbeat();
+            </code>
+            Each monitored thread should issue heartbeats regularly, ensuring the first is issues as soon
+            as possible. Each hearbeat should contain an estimation on how long a delay is expected before
+            the next heartbeat from the thread.
+            <code>
+            HeartbeatGenerator.RegisterThreadHeartbeat(TimeSpan.FromMinutes(2));
+            </code>
+            Before the monitored thread is terminated it must be deregistered from the heartbeat generation.
+            If this is not done, the thread will be reported hanging.
+            <code>
+            HeartbeatGenerator.RegisterThreadTerminating();
+            </code>
+            </example>
+            </remarks>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.HeartbeatGenerator.StartAutomaticServiceHeartbeat">
+            <summary>
+            Start automatically raising service heartbeats at the specified interval until the process terminates.
+            </summary>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.HeartbeatGenerator.RegisterThreadHeartbeat(System.TimeSpan)">
+            <summary>
+            Raise a heartbeat for the current thread.
+            </summary>
+            <param name="threadHeartbeatTimeout">The timeout before the next heartbeat will be raised from the thread. If this time is exeeded the thread will be considered hanging.</param>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.HeartbeatGenerator.RegisterThreadHeartbeat(System.Int32,System.String,System.TimeSpan)">
+            <summary>
+            Raise a heartbeat for the specified thread.
+            </summary>
+            <param name="threadId">The thread id.</param>
+            <param name="threadName">The name of the thread, or null if the name is not relevant.</param>
+            <param name="threadHeartbeatTimeout">The timeout before the next heartbeat will be raised from the thread. If this time is exeeded the thread will be considered hanging.</param>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.HeartbeatGenerator.RegisterThreadTerminating">
+            <summary>
+            Signals the current thread is terminating and no further heartbeats will be send.
+            </summary>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.HeartbeatGenerator.RegisterThreadTerminating(System.Int32)">
+            <summary>
+            Signals the specified thread is terminating and no furhter heartbearts will be send.
+            </summary>
+            <param name="threadId">The thread id.</param>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.HeartbeatGenerator.SendHeartbeat(System.TimeSpan)">
+            <summary>
+            Sends a service heartbeat with the specified timeout. This method is intended for single threaded services where starting a workerthread is undesirable. It is recommended to use automatic service heartbeats instead.
+            </summary>
+            <param name="serviceHeartbeatTimeout">The timeout before the next heartbeat will be send. If this time is exeeded the service will be considered hanging.</param>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.HeartbeatGenerator.MonitoringAgentUdpPort">
+            <summary>
+            Gets or sets the UDP port service heartbeats should be send to.
+            </summary>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.HeartbeatGenerator.MonitoringAgentServer">
+            <summary>
+            Gets or sets the server heartbeats should be send to.
+            </summary>
+            <remarks>
+            Receiving heartbeats from a remote server will normally be disabled. Specifying
+            another server is allowed in order to test that a remote server is not accepting
+            the heartbeats send from the test application.
+            </remarks>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.HeartbeatGenerator.ServiceType">
+            <summary>
+            Gets or sets the service type. The default value is the process name.
+            </summary>
+            <example>
+            ServiceType = "Publisher";
+            </example>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.HeartbeatGenerator.ServiceInstance">
+            <summary>
+            Sets or gets the instance name for this specific service. This is used when multiple instances of a service can run on the same system.
+            </summary>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.HeartbeatGenerator.AutomaticServiceHeartbeatInterval">
+            <summary>
+            Sets the interval between service heartbeats when using automatic service heartbeats. It must be set to one second or more, and can not exceed one week.
+            </summary>
+            <remarks>The service process timeout will be set to 2.3 times the heartbeat interval to ensure a single lost heartbeat will not result in a timeout.</remarks>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.HeartbeatGenerator.MaxMonitoredThreads">
+            <summary>
+            Sets or gets the maximum number of monitored threads. When the maximum is reached, the thread will be ignored by the monitoring system.
+            </summary>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.HeartbeatGenerator.SuppressServiceHeartbeats">
+            <summary>
+            When set service heartbeats will not be send. Used from the test application only.
+            </summary>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.HeartbeatGenerator.ThreadHeartbeatsApplicable">
+            <summary>
+            If set to false, the heartbeat will report thread count as not applicable (-1). Used from the test application only
+            </summary>
+        </member>
+        <member name="E:Tridion.ApplicationMonitoring.HeartbeatGenerator.ServiceHeartbeatSend">
+            <summary>
+            Raised every time the service heartbeat is send. Used from the test application only.
+            </summary>
+        </member>
+        <member name="T:Tridion.ApplicationMonitoring.ServiceHeartbeatSendEventArgs">
+            <summary>
+            Event arguments used in the test application when the service heartbeat is send. This should not be used in any monitored service.
+            </summary>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.ServiceHeartbeatSendEventArgs.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Constructe the ServiceHeartbeatSendEventArgs.
+            </summary>
+            <param name="timeoutInSeconds">The timeout included in the heartbeat.</param>
+            <param name="suppressed">Set to true if the heartbeat was never send to the UDP port (simulating a lost heartbeat).</param>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.ServiceHeartbeatSendEventArgs.TimeSend">
+            <summary>
+            The timestamp of the heartbeat.
+            </summary>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.ServiceHeartbeatSendEventArgs.TimeoutInSeconds">
+            <summary>
+            The timeout in seconds
+            </summary>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.ServiceHeartbeatSendEventArgs.Suppressed">
+            <summary>
+            If true, the heartbeat was not sent to the UDP port (simulating missed heartbeat). If false, the heartbeat was sent as usual.
+            </summary>
+        </member>
+        <member name="T:Tridion.ApplicationMonitoring.ServiceHeartbeatTestAccess">
+            <summary>
+            Internal class used by the test application for testing the heartbeat service. It should not be called form any service.
+            </summary>
+        </member>
+        <member name="M:Tridion.ApplicationMonitoring.ServiceHeartbeatTestAccess.StopAutomaticServiceHeartbeat">
+            <summary>
+            Stops sending service heartbeats.
+            </summary>
+        </member>
+        <member name="P:Tridion.ApplicationMonitoring.ServiceHeartbeatTestAccess.SuppressServiceHeartbeats">
+            <summary>
+            If set, the service heartbeats are not sent.
+            </summary>
+        </member>
+        <member name="E:Tridion.ApplicationMonitoring.ServiceHeartbeatTestAccess.ServiceHeartbeatSend">
+            <summary>
+            Raised when the heartbeat is send.
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.ComWrapper.ConfigurationManagerFacade">
+            <summary>
+            Provides a COM class for the ConfigurationManager singleton class
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.ComWrapper.IConfigurationManager">
+            <summary>
+            The COM interface for the ConfigurationManager implementation
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ComWrapper.IConfigurationManager.Flush">
+            <summary>
+            Flushes the internal cached configuration objects.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ComWrapper.ConfigurationManagerFacade.Flush">
+            <summary>
+            Flushes the internal cached configuration objects.
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.ConfigurationException">
+            <summary>
+            The exception that is thrown when a non-fatal application error occurs in one of the configuration objects.
+            </summary>
+        </member>
+        <member name="T:Tridion.TridionException">
+            <summary>
+            The exception that is thrown when a non-fatal application error occurs in a tridion product. 
+            </summary>
+            <remarks>If you are designing an application that needs to create its own exceptions, you must derive custom exceptions from the LocalizableException class.</remarks>
+        </member>
+        <member name="M:Tridion.TridionException.#ctor(System.String,System.Exception,System.Enum,System.Enum,System.Diagnostics.TraceEventType)">
+            <summary>
+            Initializes a new instance of the TridionException class with a specified error message, error code, category, severity and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+            <param name="errorCode">The error code for the exception.</param>
+            <param name="category">The category for the exception.</param>
+            <param name="severity">The severity for the exception.</param>
+        </member>
+        <member name="M:Tridion.TridionException.#ctor(System.String,System.Exception,System.Enum,System.Enum)">
+            <summary>
+            Initializes a new instance of the TridionException class with a specified error message, error code, category and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+            <param name="errorCode">The error code for the exception.</param>
+            <param name="category">The category for the exception.</param>
+        </member>
+        <member name="P:Tridion.TridionException.ErrorCode">
+            <summary>
+            Gets the error code of the execption.
+            </summary>
+            <remarks>The error code can be used if the program is for example runnning from a dos command.</remarks>
+        </member>
+        <member name="P:Tridion.TridionException.Category">
+            <summary>
+            Gets the category of the exception.
+            </summary>
+            <remarks>The category is internally used for logging.</remarks>
+        </member>
+        <member name="P:Tridion.TridionException.Severity">
+            <summary>
+            Gets the severity of the exception.
+            </summary>
+            <remarks>The severity is internally used for logging.</remarks>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ConfigurationException class with a specified error message.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the ConfigurationException class with a specified error message and a reference to the inner exception that is the cause of this exception. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+        <member name="T:Tridion.Configuration.ConfigurationManager">
+            <summary>
+             Provides access to configuration files for client applications. This class cannot be inherited. 
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationManager.SaveCommonSettings">
+            <summary>
+            Use this method for persisting modifications made to the common settings
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationManager.SaveConfigurationSections">
+            <summary>
+            Save the configuration sections to disk.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationManager.GetSection(System.String)">
+            <summary>
+            Returns the specified ConfigurationSection object.
+            </summary>
+            <param name="sectionName">The path to the section to be returned.</param>
+            <returns>The specified ConfigurationSection object.</returns>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationManager.AddSection(System.String,System.Configuration.ConfigurationSection)">
+            <summary>
+            Add a ConfigurationSection object to the ConfigurationSectionCollection.
+            </summary>
+            <param name="sectionName">The name of the section to be added.</param>
+            <param name="section">The section to be added.</param>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationManager.RemoveSection(System.String)">
+            <summary>
+            Removes the specified Configuration object from the ConfigurationSectionCollection.
+            </summary>
+            <param name="sectionName">The name of the section to be removed.</param>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationManager.Save(System.String)">
+            <summary>
+            Writes the configuration settings contained within the Configuration object to the XML configuration file. 
+            </summary>
+            <param name="sectionName">The name of the section to be saved.</param>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationManager.Save(System.String,System.Configuration.ConfigurationSaveMode)">
+            <summary>
+            Writes the configuration settings contained within the Configuration object to the XML configuration file. 
+            </summary>
+            <param name="sectionName">The name of the section to be saved.</param>
+            <param name="saveMode">A ConfigurationSaveMode value that determines which property values to save.</param>
+        </member>
+        <member name="M:Tridion.Configuration.ConfigurationManager.Flush">
+            <summary>
+            Flushes to internal cached configuration objects.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.ConfigurationManager.ConfigurationSections">
+            <summary>
+            Gets a collection of configuration sections defined by this configuration.
+            If you want to add a configuration section use the ConfigurationManger.ConfigurationSection.Sections.Add method. 
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.ConfigurationManager.CommonSettings">
+            <summary>
+            Gets and sets a collection of common sections defined by this configuration.
+            </summary>
+        </member>
+        <member name="E:Tridion.Configuration.ConfigurationManager.OnFlushed">
+            <summary>
+            Classes that wants to be informed when the configuration is flushed can choose to respond to this OnFlushed event, and also define the methods that are to be called in order to handle the event.
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.ConfigurationManager.ConfigurationFlushedEventHandler">
+            <summary>
+            Delegate used by the ConfigurationFlushedEventHandler event.
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.ConfigurationSections">
+            <summary>
+            Represents a section within a configuration file.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.ConfigurationSections.Sections">
+            <summary>
+            Gets and sets the SectionCollection
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.LocalizationSettings">
+            <summary>
+            Represents a localization setting within a configuration file.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.LocalizationSettings.LoggingCulture">
+            <summary>
+            Gets and sets the culture information used for logging
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.LocalizationSettings.Resources">
+            <summary>
+            Gets and sets the resources used by the StringResourceManager
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.CommonSettings">
+            <summary>
+            Represents a section within a configuration file.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.CommonSettings.LocalizationSettings">
+            <summary>
+            Gets and sets the LocalizationSettings
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.CommonSettings.ApplicationMonitoringSettings">
+            <summary>
+            Gets and sets the ApplicationMonitoringSettings
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.SectionCollection">
+            <summary>
+            Represents a configuration element containing a collection of section elements.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.SectionCollection.#ctor">
+            <summary>
+            Creates a new instance of the SectionCollection class.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.SectionCollection.CreateNewElement">
+            <summary>
+            Creates a new SectionElement.
+            </summary>
+            <returns>A new SectionElement.</returns>
+        </member>
+        <member name="M:Tridion.Configuration.SectionCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified SectionElement.
+            </summary>
+            <param name="section"></param>
+            <returns>An Object that acts as the key for the specified SectionElement.</returns>
+        </member>
+        <member name="M:Tridion.Configuration.SectionCollection.Add(Tridion.Configuration.SectionElement)">
+            <summary>
+            Adds a SectionElement to a SectionCollection.
+            </summary>
+            <param name="section">The SectionElement to add.</param>
+        </member>
+        <member name="M:Tridion.Configuration.SectionCollection.BaseAdd(System.Configuration.ConfigurationElement)">
+            <summary>
+            Adds a SectionElement to a SectionCollection.
+            </summary>
+            <param name="section">The SectionElement to add.</param>
+        </member>
+        <member name="M:Tridion.Configuration.SectionCollection.Remove(System.Configuration.ConfigurationElement)">
+            <summary>
+            Removes a SectionElement from the collection.
+            </summary>
+            <param name="section">The SectionElement to remove.</param>
+        </member>
+        <member name="M:Tridion.Configuration.SectionCollection.RemoveAt(System.Int32)">
+            <summary>
+            Removes the SectionElement at the specified index location.
+            </summary>
+            <param name="index">The index location of the SectionElement to remove.</param>
+        </member>
+        <member name="P:Tridion.Configuration.SectionCollection.CollectionType">
+            <summary>
+            Gets the type of the SectionCollection.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.SectionCollection.Item(System.Int32)">
+            <summary>
+            Gets the SectionElement at the specified index location. 
+            </summary>
+            <param name="index">The index location of the SectionElement to get.</param>
+            <returns>A SectionElement at the specified index.</returns>
+        </member>
+        <member name="T:Tridion.Configuration.SectionElement">
+            <summary>
+            Represents a section element within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.SectionElement.#ctor">
+            <summary>
+            Creates a new instance of the SectionElement class.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.SectionElement.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of the SectionElement class.
+            </summary>
+            <param name="name">The name of the section</param>
+            <param name="filePath">The file path to where the section is saved and opened.</param>
+        </member>
+        <member name="M:Tridion.Configuration.SectionElement.Clone">
+            <summary>
+            Creates an instance of the SectionElement class that is identical to the current SectionElement
+            </summary>
+            <returns>A SectionElement whose properties are identical to those of this SectionElement.</returns>
+        </member>
+        <member name="P:Tridion.Configuration.SectionElement.Name">
+            <summary>
+            Gets and sets the name of the section.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.SectionElement.FilePath">
+            <summary>
+            Gets and sets the file path to where the section is saved and opened.
+            </summary>
+        </member>
+        <member name="T:Tridion.Configuration.ResourceCollection">
+            <summary>
+            Represents a configuration element containing a collection of resource elements.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceCollection.#ctor">
+            <summary>
+            Creates a new instance of the ResourceCollection class.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceCollection.CreateNewElement">
+            <summary>
+            Creates a new ResourceElement.
+            </summary>
+            <returns>A new ResourceElement.</returns>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified ResourceElement.
+            </summary>
+            <param name="element"></param>
+            <returns>An Object that acts as the key for the specified ResourceElement.</returns>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceCollection.Add(Tridion.Configuration.ResourceElement)">
+            <summary>
+            Adds a ResourceElement to a ResourceCollection.
+            </summary>
+            <param name="resource">The ResourceElement to add.</param>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceCollection.BaseAdd(System.Configuration.ConfigurationElement)">
+            <summary>
+            Adds a ResourceElement to a ResourceCollection.
+            </summary>
+            <param name="element">The ResourceElement to add.</param>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceCollection.Remove(Tridion.Configuration.ResourceElement)">
+            <summary>
+            Removes a ResourceElement from the collection.
+            </summary>
+            <param name="resource">The ResourceElement to remove.</param>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceCollection.RemoveAt(System.Int32)">
+            <summary>
+            Removes the ResourceElement at the specified index location.
+            </summary>
+            <param name="index">The index location of the ResourceElement to remove.</param>
+        </member>
+        <member name="P:Tridion.Configuration.ResourceCollection.CollectionType">
+            <summary>
+            Gets the type of the ResourceCollection.
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.ResourceCollection.Item(System.Int32)">
+            <summary>
+            Gets the ResourceElement at the specified index location. 
+            </summary>
+            <param name="index">The index location of the ResourceElement to get.</param>
+            <returns>A ResourceElement at the specified index.</returns>
+        </member>
+        <member name="T:Tridion.Configuration.ResourceElement">
+            <summary>
+            Represents a resource element within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceElement.#ctor">
+            <summary>
+            Creates a new instance of the ResourceElement class.
+            </summary>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceElement.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of the ConfigurationElement class.
+            </summary>
+            <param name="baseName">The base name of the assembly where the resources are located.</param>
+            <param name="assembly">The name of the assembly</param>
+        </member>
+        <member name="M:Tridion.Configuration.ResourceElement.Clone">
+            <summary>
+            Creates an instance of the ResourceElement class that is identical to the current ResourceElement
+            </summary>
+            <returns>A ResourceElement whose properties are identical to those of this ResourceElement.</returns>
+        </member>
+        <member name="P:Tridion.Configuration.ResourceElement.BaseName">
+            <summary>
+            Gets and sets the base name of the ResourceElement
+            </summary>
+        </member>
+        <member name="P:Tridion.Configuration.ResourceElement.Assembly">
+            <summary>
+            Gets and sets the assembly of the ResourceElement
+            </summary>
+        </member>
+        <member name="T:Tridion.Constants">
+            <summary>
+            Summary description for ConstantsCommon.
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.IdNull">
+            <summary>
+            Specifies an undefined or missing id in an URI.
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.UriVersionSeparator">
+            <summary>
+            Separates the version part of the URI.
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.TcmURINull">
+            <summary>
+            Null URI: tcm:0-0-0
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.TcmPrefix">
+            <summary>
+            Prefix for the namespace "http://www.tridion.com/ContentManager/5.0".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.TcmNamespace">
+            <summary>
+            Namespace: "http://www.tridion.com/ContentManager/5.0".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.TcmApiPrefix">
+            <summary>
+            Prefix for the namespace "http://www.tridion.com/ContentManager/5.0/TCMAPI".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.TcmApiNamespace">
+            <summary>
+            Namespace: "http://www.tridion.com/ContentManager/5.0/TCMAPI".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.XlinkPrefix">
+            <summary>
+            Prefix for the namespace "http://www.w3.org/1999/xlink".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.XlinkNamespace">
+            <summary>
+            Namespace: "http://www.w3.org/1999/xlink".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.XsdPrefix">
+            <summary>
+            Prefix for the namespace "http://www.w3.org/2001/XMLSchema".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.XsdNamespace">
+            <summary>
+            Namespace: "http://www.w3.org/2001/XMLSchema".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.XhtmlPrefix">
+            <summary>
+            Prefix for the namespace "http://www.w3.org/1999/xhtml".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.XhtmlNamespace">
+            <summary>
+            Namespace: "http://www.w3.org/1999/xhtml".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.RdfPrefix">
+            <summary>
+            Prefix for the namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.RdfNamespace">
+            <summary>
+            Namespace: "http://www.w3.org/1999/02/22-rdf-syntax-ns#".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.RdfsPrefix">
+            <summary>
+            Prefix for the namespace "http://www.w3.org/2000/01/rdf-schema#".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.RdfsNamespace">
+            <summary>
+            Namespace: "http://www.w3.org/2000/01/rdf-schema#".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.OwlPrefix">
+            <summary>
+            Prefix for the namespace "http://www.w3.org/2002/07/owl#".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.OwlNamespace">
+            <summary>
+            Namespace: "http://www.w3.org/2002/07/owl#".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.TcmtPrefix">
+            <summary>
+            Prefix for the namespace "http://www.tridion.com/ContentManager/5.2/Taxonomies#".
+            </summary>
+        </member>
+        <member name="F:Tridion.Constants.TcmtNamespace">
+            <summary>
+            Namespace: "http://www.tridion.com/ContentManager/5.2/Taxonomies#".
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.ItemTypes">
+            <summary>
+            Defines ConstantsCommon for system defined item types.
+            </summary>
+            
+        </member>
+        <member name="T:Tridion.ContentManager.ItemType">
+            <summary>
+            Specifies the Content Manager item types.
+            </summary>
+            <remarks>
+            This enumeration defines both the symbolic names and numeric values for all TCM item types.
+            The numeric values are used in TCM URIs.
+            Note that the numeric values look like bit flags, but they are not really: 
+            repository-local, system-wide and workflow item types have overlapping bit values.
+            Therefore, performing bitwise ORs or ANDs is dangerous; it can only be done for item types of
+            the same "class" (repository-local, system-wide or workflow).
+            </remarks>
+        </member>
+        <member name="T:Tridion.ContentManager.TcmUri">
+            <summary>
+            Represents a native Tridion Content Manager URI which uniquely identifies a resource in the system.
+            </summary>
+            <example><code></code></example>
+            <remarks>The structure of a TCM URI is PublicationID-ItemID[-ItemType][-vVersion].</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.#ctor">
+            <summary>
+            Initializes a new instance of the TcmUri class.
+            </summary>
+            <remarks>This constructor will be changed to private. Use TcmUri.UriNull instead.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.#ctor(System.Int32,Tridion.ContentManager.ItemType)">
+            <summary>
+            Initializes a new instance of the TcmUri class with the specified itemID and itemType.
+            </summary>
+            <param name="itemId">The unique identifier for the item.</param>
+            <param name="itemType">The type of item.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.#ctor(System.Int32,Tridion.ContentManager.ItemType,System.Int32)">
+            <summary>
+            Initializes a new instance of the TcmUri class with the specified itemID, itemType and publicationID.
+            </summary>
+            <param name="itemId">The unique identifier for the item.</param>
+            <param name="itemType">The type of item.</param>
+            <param name="publicationId">The unique identifier for the publication.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.#ctor(System.Int32,Tridion.ContentManager.ItemType,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the TcmUri class with the specified itemID, itemType, publicationID, and version.
+            </summary>
+            <param name="itemId">The unique identifier for the item.</param>
+            <param name="itemType">The type of item.</param>
+            <param name="publicationId">The unique identifier for the publication.</param>
+            <param name="version">The version number.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the TcmUri class with the itemID, itemType, publicationID, and version extracted from the URI.
+            </summary>
+            <param name="uri">The URI containing the itemID, itemType, publicationID, and version.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.IsValid(System.String)">
+            <summary>
+            Returns whether the given value is valid for this type.
+            </summary>
+            <param name="uri">The <see cref="T:System.String"/> to test for validity.</param>
+            <returns>true if the specified value is valid for this object; otherwise, false.</returns>
+            <remarks>This property is true if the string that was passed into the method 
+            can be parsed as a <see cref="T:Tridion.ContentManager.TcmUri"/> instance, which has a structure of 
+            {PublicationID-ItemID}[-ItemType][-vVersion]. Otherwise, the property is false.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.Parse(System.String,Tridion.ContentManager.ItemType@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            Converts a string that represents a TCM URI into an actual TcmUri type and returns the individual elements.
+            </summary>
+            <param name="uri">The string representation of <see cref="T:Tridion.ContentManager.TcmUri"/>.</param>
+            <param name="itemType">The item type of the item <see cref="T:Tridion.ContentManager.TcmUri"/> represents.</param>
+            <param name="itemId">The item <see cref="T:Tridion.ContentManager.TcmUri"/> represents.</param>
+            <param name="publicationId">The publication in which the item that is represented by <see cref="T:Tridion.ContentManager.TcmUri"/> is in.</param>
+            <param name="version">The version of the resource <see cref="T:Tridion.ContentManager.TcmUri"/> represents.</param>
+            <returns>true if succesfully parsed, false if parsing failed.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.Parse(System.String)">
+            <summary>
+            Converts a string that represents a TCM URI into an actual TcmUri type.
+            </summary>
+            <param name="uri">The string representation of a <see cref="T:Tridion.ContentManager.TcmUri"/>.</param>
+            <returns>true if succesfully parsed, false if parsing failed</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.ToString">
+            <summary>
+            Returns a System.String that represents the current Tridion.ContentManager.TcmUri.
+            </summary>
+            <returns>A System.String that represents the current Tridion.ContentManager.TcmUri</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.op_Implicit(Tridion.ContentManager.TcmUri)~System.String">
+            <summary>
+            Supports (implicit) cast to string.
+            </summary>
+            <param name="source">The TcmUri object to cast to a string.</param>
+            <returns>A string representation of the TCM URI. See <see cref="M:Tridion.ContentManager.TcmUri.ToString"/>.</returns>
+            <remarks>
+            <example><code>
+            TcmUri myTcmUri = new TcmUri("tcm:1-2")
+            string uri = myTcmUri;
+            </code></example>
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type, suitable for use in hashing algorithms and data structures like a hash table.
+            </summary>
+            <returns>A hash code for the current Tridion.ContentManager.TcmUri.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.Equals(System.Object)">
+            <summary>
+            Determines whether the specified Tridion.ContentManager.TcmUri is equal to the current Tridion.ContentManager.TcmUri.  
+            </summary>
+            <param name="obj">The Tridion.ContentManager.TcmUri to compare with the current Tridion.ContentManager.TcmUri.</param>
+            <returns>true if the specified Tridion.ContentManager.TcmUri is equal to the current Tridion.ContentManager.TcmUri; otherwise, false.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.Equals(System.Object,System.Object)">
+            <summary>
+            Determines whether the specified Tridion.ContentManager.TcmUri instances are considered equal.
+            </summary>
+            <param name="objA">The first Tridion.ContentManager.TcmUri to compare.</param>
+            <param name="objB">>The second Tridion.ContentManager.TcmUri to compare.</param>
+            <returns>true if objA is the same instance as objB or if both are null references or if objA.Equals(objB) returns true; otherwise, false. </returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.IsNull(System.Object)">
+            <summary>
+            Helper method to check whether an object is null, without the influence
+            of operator overloading.
+            </summary>
+            <param name="obj">The object to check for being null</param>
+            <returns>obj==null</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.op_Equality(Tridion.ContentManager.TcmUri,Tridion.ContentManager.TcmUri)">
+            <summary>
+            Determines whether the specified TcmUri instances are considered equal (equality operator overload).
+            </summary>
+            <param name="objA">The first instance to compare.</param>
+            <param name="objB">The second instance to compare.</param>
+            <returns><c>true</c> if both instances represent the same TCM URI.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.op_Inequality(Tridion.ContentManager.TcmUri,Tridion.ContentManager.TcmUri)">
+            <summary>
+            Determines whether the specified TcmUri instances are considered different (inequality operator overload).
+            </summary>
+            <param name="objA">The first instance to compare.</param>
+            <param name="objB">The second instance to compare.</param>
+            <returns><c>false</c> if both instances represent the same TCM URI.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.op_Equality(Tridion.ContentManager.TcmUri,System.String)">
+            <summary>
+            Determines whether the specified TcmUri instance and string are considered equal (equality operator overload).
+            </summary>
+            <param name="objA">The TcmUri instance to compare.</param>
+            <param name="objB">The string to compare against.</param>
+            <returns><c>true</c> if the TcmUri instance represent the same TCM URI as the string.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.TcmUri.op_Inequality(Tridion.ContentManager.TcmUri,System.String)">
+            <summary>
+            Determines whether the specified TcmUri instance and string are considered different (inequality operator overload).
+            </summary>
+            <param name="objA">The TcmUri instance to compare.</param>
+            <param name="objB">The string to compare against.</param>
+            <returns><c>false</c> if the TcmUri instance represent the same TCM URI as the string.</returns>
+        </member>
+        <member name="P:Tridion.ContentManager.TcmUri.UriNull">
+            <summary>
+            Gets a <see cref="T:Tridion.ContentManager.TcmUri"/> instance that represents a URI null (tcm:0-0-0).
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.TcmUri.ItemId">
+            <summary>
+            Gets the Item ID of the item represented by this instance of TcmUri.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.TcmUri.ItemType">
+            <summary>
+            Gets the Item Type of the item represented by this instance of TcmUri.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.TcmUri.PublicationId">
+            <summary>
+            Gets the Publication ID of the item represented by this instance of TcmUri.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.TcmUri.Version">
+            <summary>
+            Gets the version of the item represented by this instance of TcmUri.
+            </summary>
+        </member>
+        <member name="T:Tridion.ExceptionErrorCode">
+            <summary>
+            Enumerations that are used for the error code inside the TridionExceptions.
+            </summary>
+        </member>
+        <member name="F:Tridion.ExceptionErrorCode.General">
+            <summary>
+            Used for general exceptions like TridionNotSupportedException.
+            </summary>
+        </member>
+        <member name="F:Tridion.ExceptionErrorCode.Configuration">
+            <summary>
+            Used for throwning exceptions that have to do with configuration.
+            </summary>
+        </member>
+        <member name="F:Tridion.ExceptionErrorCode.Logging">
+            <summary>
+            Used for throwing exceptions that have to do with logging.
+            </summary>
+        </member>
+        <member name="F:Tridion.ExceptionErrorCode.Licensing">
+            <summary>
+            Used for throwing exceptions that have to do with licensing.
+            </summary>
+        </member>
+        <member name="F:Tridion.ExceptionErrorCode.Localization">
+            <summary>
+            Used for throwing exceptions that have to do with localization.
+            </summary>
+        </member>
+        <member name="F:Tridion.ExceptionErrorCode.ApplicationMonitoring">
+            <summary>
+            Used for throwing exceptions that have to do with application monitoring.
+            </summary>
+        </member>
+        <member name="T:Tridion.TridionArgumentException">
+            <summary>
+            The exception that is thrown when one of the arguments provided to a method is not valid.
+            </summary>
+            <remarks>
+            <para>TridionArgumentException is thrown when a method is invoked and at least one of the passed arguments does not meet the parameter specification of the called method. All instances of TridionArgumentException should carry a meaningful error message describing the invalid argument, as well as the expected range of values for the argument.</para>
+            <para>The primary derived classes of TridionArgumentException are TridionArgumentNullException and TridionArgumentOutOfRangeException. These derived classes should be used instead of TridionArgumentException, except in situations where neither of the derived classes is acceptable. For example, exceptions should be thrown by:</para>
+            <para>TridionArgumentNullException whenever a null reference (Nothing in Visual Basic) is passed to a method that does not accept it as a valid argument.</para>
+            <para>TridionArgumentOutOfRangeException when the value of an argument is outside the range of acceptable values; for example, when the value "46" is passed as the month argument during the creation of a DateTime.</para>
+            <para>If the method call does not have any argument or if the failure does not involve the arguments themselves, then InvalidOperationException should be used.</para>
+            </remarks>
+        </member>
+        <member name="T:Tridion.Localization.LocalizableException">
+             <summary>
+             This is the abstract class where all custom exception must inherit from.
+             </summary>
+             <remarks>Do not log the exceptions you throw, it is the responsibility of the client application.</remarks>
+             <example>
+             <code>
+                public enum MyErrorCode
+                {
+                    ItemNotFound = 0,
+                }
+            
+                public enum MyCategory
+                {
+                    Versioning = 0,
+                }
+            
+                public class ItemDoesNotExistException : LocalizableException
+                {
+                    public ItemDoesNotExistException( TcmUri uri )
+                        : base( new LocalizableMessage( Resource.msgItemDoesNotExistException, uri ), null, MyErrorCode.ItemNotFound, MyCategory.Versioning, TraceEventType.Warning )
+                    {
+                    }
+            
+                    public ItemDoesNotExistException( TcmUri uri, Exception innerException )
+                        : base( new LocalizableMessage( Resource.msgItemDoesNotExistException, uri ), innerException, MyErrorCode.ItemNotFound, MyCategory.Versioning, TraceEventType.Warning )
+                    {
+                    }
+                }
+             </code>
+             The ItemDoesNotExistException should be a resource in a assembly
+             msgItemDoesNotExistException = The item {0} does not exist
+             Don't forget to add the assembly that contains this resource to the configuraton
+             </example>
+        </member>
+        <member name="M:Tridion.Localization.LocalizableException.#ctor(Tridion.Localization.LocalizableMessage,System.Exception,System.Enum,System.Enum,System.Diagnostics.TraceEventType)">
+            <summary>
+            Initializes a new instance of the LocalizableException class with a specified error message, error code, category, severity and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+            <param name="errorCode">The error code for the exception.</param>
+            <param name="category">The category for the exception.</param>
+            <param name="severity">The severity for the exception.</param>
+        </member>
+        <member name="M:Tridion.Localization.LocalizableException.#ctor(Tridion.Localization.LocalizableMessage,System.Exception,System.Enum,System.Enum)">
+            <summary>
+            Initializes a new instance of the LocalizableException class with a specified error message, error code, category and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+            <param name="errorCode">The error code for the exception.</param>
+            <param name="category">The category for the exception.</param>
+        </member>
+        <member name="P:Tridion.Localization.LocalizableException.LocalizableMessage">
+            <summary>
+            Gets the LocalizableMessage of the exception.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.LocalizableException.Message">
+            <summary>
+            Generates the localized message.
+            </summary>
+            <returns>A string respresenting a default localized message.</returns>
+        </member>
+        <member name="M:Tridion.TridionArgumentException.#ctor(Tridion.Localization.LocalizableMessage)">
+            <summary>
+            Initializes a new instance of the TridionArgumentException class with a specified error message. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="T:Tridion.TridionArgumentNullException">
+            <summary>
+            The exception that is thrown when a null reference (Nothing in Visual Basic) is passed to a method that does not accept it as a valid argument. 
+            </summary>
+        </member>
+        <member name="M:Tridion.TridionArgumentNullException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ArgumentNullException class with the name of the parameter that causes this exception. 
+            </summary>
+            <param name="paramName">The name of the parameter that caused the exception.</param>
+        </member>
+        <member name="T:Tridion.TridionArgumentOutOfRangeException">
+            <summary>
+            The exception that is thrown when the value of an argument is outside the allowable range of values as defined by the invoked method.
+            </summary>
+        </member>
+        <member name="M:Tridion.TridionArgumentOutOfRangeException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the TridionArgumentOutOfRangeException class with the name of the parameter that causes this exception. 
+            </summary>
+            <param name="paramName">The name of the parameter that causes this exception.</param>
+        </member>
+        <member name="M:Tridion.TridionArgumentOutOfRangeException.#ctor(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Initializes a new instance of the TridionArgumentOutOfRangeException class with the name of the parameter that causes this exception, the actual value, and the allowed minimum and maximum values.
+            </summary>
+            <param name="paramName">The name of the parameter that causes this exception.</param>
+            <param name="actualValue">The actual value of the parameter being set.</param>
+            <param name="minimumValue">The minumum allowed value in the valid range.</param>
+            <param name="maximumValue">The maximum allowed value in the valid range.</param>
+        </member>
+        <member name="M:Tridion.TridionArgumentOutOfRangeException.#ctor(Tridion.Localization.LocalizableMessage)">
+            <summary>
+            Initializes a new instance of the TridionArgumentOutOfRangeException class with a specified error message and the name of the parameter that causes this exception. 
+            </summary>
+            <param name="message">A LocalizableMessage that describes the error.</param>
+        </member>
+        <member name="T:Tridion.TridionInvalidOperationException">
+            <summary>
+            The exception that is thrown when a method call is invalid for the object's current state. 
+            </summary>
+            <remarks>
+            <para>TridionInvalidOperationException is used in cases when the failure to invoke a method is caused by reasons other than invalid arguments. For example, TridionInvalidOperationException is thrown by:</para> 
+            <para>MoveNext if objects of a collection are modified after the enumerator is created.</para>
+            <para>GetString if the resource set is closed before the method call is made.</para>
+            <para>If the method invocation failure is due to invalid arguments, then TridionArgumentException or one of its derived classes, TridionArgumentNullException or TridionArgumentOutOfRangeException, should be thrown instead.</para>
+            </remarks>
+        </member>
+        <member name="M:Tridion.TridionInvalidOperationException.#ctor(Tridion.Localization.LocalizableMessage)">
+            <summary>
+            Initializes a new instance of the TridionInvalidOperationException class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="T:Tridion.TridionNotSupportedException">
+            <summary>
+            The exception that is thrown when an invoked method is not supported.
+            </summary>
+        </member>
+        <member name="M:Tridion.TridionNotSupportedException.#ctor">
+            <summary>
+            Initializes a new instance of the TridionNotSupportedException class with a predefined error message.
+            </summary>
+        </member>
+        <member name="M:Tridion.TridionNotSupportedException.#ctor(Tridion.Localization.LocalizableMessage)">
+            <summary>
+            Initializes a new instance of the TridionNotSupportedException class with a specified error message.
+            </summary>
+            <param name="message">A LocalizableMessage that describes the error. The content of message is intended to be understood by humans.</param>
+        </member>
+        <member name="T:Tridion.TridionSoapException">
+            <summary>
+            The soap exception that is thrown when a non-fatal application error occurs in web service.
+            </summary>
+        </member>
+        <member name="M:Tridion.TridionSoapException.#ctor(System.String,System.String,System.Xml.XmlElement,System.Exception)">
+            <summary>
+            Initializes a new instance of the TridionSoapException class with a specified error message, actor, detail and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="actor">The piece of code that caused the exception.</param>
+            <param name="detail">The application-specific error information details.</param>
+            <param name="inner">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+        <member name="M:Tridion.TridionSoapException.CreateFrom(System.Exception,System.Web.HttpRequest,System.Globalization.CultureInfo)">
+            <summary>
+            Initializes a new instance of the TridionSoapException class based on an exception for a specific culture.
+            </summary>
+            <param name="exception">The exception to create the TridionSoapException from.</param>
+            <param name="httpRequest">The request for getting the fault actor in case there is the exception is no soap exception.</param>
+            <param name="culture">The culture to localize the exception.</param>
+            <returns>A TridionSoapException.</returns>
+        </member>
+        <member name="M:Tridion.TridionSoapException.ToString">
+            <summary>
+            Generates a clean SOAP fault string.
+            </summary>
+            <returns>A string respresenting a SOAP fault string.</returns>
+        </member>
+        <member name="T:Tridion.Licensing.LicenseManager">
+            <summary>
+            The Tridion Licensing manager uses the TCMLicensing COM object.
+            When a license info object is requested, we will try to get it from the cache.
+            If the object is not cached, we'll request it from the TCMLicensing and add it to the cache.
+            The LicenseInfo constructor sets it's cache expiration date equal to that of the TCMLicensing.
+            Since it is possible to create a new LicenseInfo object from a cached TCMLicensing.LicenseInfo,
+            the LicenseInfo constructor sets the isCached property not automatically to false, but assigns it
+            the TCMLicensing.LicenseInfo.IsCached property in stead.	
+            </summary>
+        </member>
+        <member name="T:Tridion.Licensing.LicensingException">
+            <summary>
+            Summary description for LicensingException.
+            </summary>
+        </member>
+        <member name="T:Tridion.Localization.LocalizableMessage">
+            <summary>
+            This class contains a string resource name and its parameters. The string can be localized depending on the culture information.
+            </summary>
+            <remarks>The message tokens used are like the one used in the String.Format function.</remarks>
+        </member>
+        <member name="M:Tridion.Localization.LocalizableMessage.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the LocalizableMessage class with a string resource name.
+            </summary>
+            <param name="resourceName">The name of the resource.</param>
+        </member>
+        <member name="M:Tridion.Localization.LocalizableMessage.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the LocalizableMessage class with a string resource name and its parameters.
+            </summary>
+            <param name="resourceName">The name of the resource.</param>
+            <param name="parameters">The parameters that are used for the token replacements.</param>
+        </member>
+        <member name="M:Tridion.Localization.LocalizableMessage.GetLocalizedMessage(System.Globalization.CultureInfo)">
+            <summary>
+            Returns the value of the specified string resource with the tokens replaced by the parameters.
+            </summary>
+            <param name="culture">The culture used for the localized string.</param>
+            <returns>The value of the resource localized for the caller's current culture settings. If a match is not possible, a LocalizationException is returned.</returns>
+        </member>
+        <member name="M:Tridion.Localization.LocalizableMessage.ToString">
+            <summary>
+            Returns the value of the specified string resource with the tokens replaced by the parameters.
+            </summary>
+            <returns>The value of the resource localized by the culture parameter. If a match is not possible, a LocalizationException is returned.</returns>
+        </member>
+        <member name="T:Tridion.Localization.LocalizationException">
+            <summary>
+            The exception that is thrown when a non-fatal application error occurs in one of the localization objects.
+            </summary>
+        </member>
+        <member name="M:Tridion.Localization.LocalizationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the LocalizationException class with a error message.
+            </summary>
+            <param name="message">A message that describes the error. This error can't be localized.</param>
+        </member>
+        <member name="T:Tridion.Localization.ResourceCommon">
+            <summary>
+            Constants for all String Resources
+            </summary>
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgUnableToGetLicenseManagerInstance">
+            <summary>
+            Resource identifier for the string: Unable to get license manager instance
+            </summary>
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgUnableToGetObject">
+            <summary>
+            Resource identifier for the string: Unable to get object: {0}
+            </summary>
+            <remarks>
+            Unable to get object: LicenseInfo
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgUnableToFlushCache">
+            <summary>
+            Resource identifier for the string: Unable to flush the cache
+            </summary>
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgUnableToGetLicenseInfoFeature">
+            <summary>
+            Resource identifier for the string: Unable to get LicenseInfo feature: {0}
+            </summary>
+            <remarks>
+            Unable to get LicenseInfo feature: Complex schemas
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgUnableToDetermineIsFeatureEnabled">
+            <summary>
+            Resource identifier for the string: Unable to determine if feature {0} is enabled
+            </summary>
+            <remarks>
+            Unable to determin if feature Complex schemas is enabled
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgInvalidLicense">
+            <summary>
+            Resource identifier for the string: Invalid license
+            </summary>
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgLicensingFeatureNotFound">
+            <summary>
+            Resource identifier for the string: Feature: {0} not found
+            </summary>
+            <remarks>
+            Feature: Complex schemas not found
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgInvalidURI">
+            <summary>
+            Resource identifier for the string: Invalid URI: {0}
+            </summary>
+            <remarks>
+            Invalid URI: tcm:0-12-3
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgArgumentNullException">
+            <summary>
+            Resource identifier for the string: Value cannot be null.\r\nParameter name: {0}.
+            </summary>
+            <remarks>
+            This exception is thrown when an argument must be specified but contains null.
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgArgumentOutOfRangeException">
+            <summary>
+            Resource identifier for the string: Specified argument was out of the range of valid values.\r\nParameter name: {0}.
+            </summary>
+            <remarks>
+            This exception is thrown when an argument is out of it specified range is encountered.
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgNotSupportedException">
+            <summary>
+            Resource identifier for the string: Specified method is not supported.
+            </summary>
+            <remarks>
+            This exception is thrown when a method is no longer supported.
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgStartTrace">
+            <summary>
+            Resource identifier for the string: Start Trace: Activity '{0}' in method '{1}' at {2} ticks.
+            </summary>
+            <remarks>
+            The message when a trace is started
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgEndTrace">
+            <summary>
+            Resource identifier for the string: End Trace: Activity '{0}' in method '{1}' at {2} ticks (elapsed time: {3} seconds)
+            </summary>
+            <remarks>
+            The message when a trace is ended that ends up in the log.
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgArgumentOutOfRangeExceptionIncludingLimits">
+            <summary>
+            Resource identifier for the string: Specified argument was out of the range of valid values.\r\nParameter name: {0}\r\nActual value: {1}\r\nMinimum value: {2}\r\nMaximum value: {3}.
+            </summary>
+            <remarks>
+            This exception is thrown when an argument is out of it specified range is encountered.
+            </remarks>      
+        </member>
+        <member name="F:Tridion.Localization.ResourceCommon.tcl_msgApplicationMonitoringInvalidNameCharacter">
+            <summary>
+            Resource identifier for the string: The Application Monitoring service type or instance name '{0}' contains invalid characters '{1}'. Valid characters are 0-9, a-z, A-Z, '_', '-', and space.
+            </summary>
+            <remarks>
+            Displayed if a configured name contains an unsupported character. {0} will be replaced by the name as it is configured, {1} will be the list of invalid characters. 
+            </remarks>      
+        </member>
+        <member name="T:Tridion.Localization.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgArgumentNullException">
+            <summary>
+              Looks up a localized string similar to Value cannot be null.\r\nParameter name: {0}..
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgArgumentOutOfRangeException">
+            <summary>
+              Looks up a localized string similar to Specified argument was out of the range of valid values.\r\nParameter name: {0}..
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgArgumentOutOfRangeExceptionIncludingLimits">
+            <summary>
+              Looks up a localized string similar to Specified argument was out of the range of valid values.\r\nParameter name: {0}\r\nActual value: {1}\r\nMinimum value: {2}\r\nMaximum value: {3}..
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgEndTrace">
+            <summary>
+              Looks up a localized string similar to End Trace: Activity &apos;{0}&apos; in method &apos;{1}&apos; at {2} ticks (elapsed time: {3} seconds).
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgInvalidLicense">
+            <summary>
+              Looks up a localized string similar to Invalid license.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgInvalidURI">
+            <summary>
+              Looks up a localized string similar to Invalid URI: {0}.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgLicensingFeatureNotFound">
+            <summary>
+              Looks up a localized string similar to Feature: {0} not found.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgNotSupportedException">
+            <summary>
+              Looks up a localized string similar to Specified method is not supported..
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgStartTrace">
+            <summary>
+              Looks up a localized string similar to Start Trace: Activity &apos;{0}&apos; in method &apos;{1}&apos; at {2} ticks..
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgUnableToDetermineIsFeatureEnabled">
+            <summary>
+              Looks up a localized string similar to Unable to determine if feature {0} is enabled.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgUnableToFlushCache">
+            <summary>
+              Looks up a localized string similar to Unable to flush the cache.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgUnableToGetLicenseInfoFeature">
+            <summary>
+              Looks up a localized string similar to Unable to get LicenseInfo feature: {0}.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgUnableToGetLicenseManagerInstance">
+            <summary>
+              Looks up a localized string similar to Unable to get license manager instance.
+            </summary>
+        </member>
+        <member name="P:Tridion.Localization.Resources.msgUnableToGetObject">
+            <summary>
+              Looks up a localized string similar to Unable to get object: {0}.
+            </summary>
+        </member>
+        <member name="T:Tridion.Localization.StringResourceManager">
+            <summary>
+            Handles the lookup of the string resources using the standard .NET resource/satellite assembly mechanism.
+            </summary>
+        </member>
+        <member name="M:Tridion.Localization.StringResourceManager.Initialize">
+            <summary>
+            Initializes the StringResourceManager class.
+            </summary>
+        </member>
+        <member name="M:Tridion.Localization.StringResourceManager.Initialize(System.Boolean)">
+            <summary>
+            Initalizes the StringResourceManager class and with an option of reloading the resource assemblies from the configuration
+            </summary>
+            <param name="force">Force reading the resource assemblies.</param>
+        </member>
+        <member name="M:Tridion.Localization.StringResourceManager.GetString(System.String)">
+            <summary>
+            Returns the value of the specified string resource.
+            </summary>
+            <param name="name">The name of the resource to get.</param>
+            <returns>The value of the resource localized for the caller's current culture settings. If a match is not possible, a LocalizationException is returned.</returns>
+        </member>
+        <member name="M:Tridion.Localization.StringResourceManager.GetString(System.String,System.Resources.ResourceManager)">
+            <summary>
+            Returns the value of the specified string resource.
+            </summary>
+            <param name="name">The name of the resource to get.</param>
+            <param name="resourceManager">The resource manager containing the resource to get.</param>
+            <returns>The value of the resource localized for the caller's current culture settings. If a match is not possible, a LocalizationException is returned.</returns>
+        </member>
+        <member name="M:Tridion.Localization.StringResourceManager.GetString(System.String,System.Globalization.CultureInfo)">
+            <summary>
+            Returns the value of the specified string resource.
+            </summary>
+            <param name="name">The name of the resource to get.</param>
+            <param name="culture">The name of the resource to get.</param>
+            <returns>The value of the resource localized by the culture parameter. If a match is not possible, a LocalizationException is returned.</returns>
+        </member>
+        <member name="M:Tridion.Localization.StringResourceManager.GetString(System.String,System.Globalization.CultureInfo,System.Resources.ResourceManager)">
+            <summary>
+            Returns the value of the specified string resource.
+            </summary>
+            <param name="name">The name of the resource to get.</param>
+            <param name="culture">The name of the resource to get.</param>
+            <param name="resourceManager">The resource manager containing the resource to get.</param>
+            <returns>The value of the resource localized by the culture parameter. If a match is not possible, a LocalizationException is returned.</returns>
+        </member>
+        <member name="T:Tridion.Logging.LoggingCategory">
+            <summary>
+            Enumerations that are used for setting the category of the TridionException that is used for logging.
+            </summary>
+        </member>
+        <member name="F:Tridion.Logging.LoggingCategory.General">
+            <summary>
+            Used for general exceptions like TridionNotSupportedException.
+            </summary>
+        </member>
+        <member name="F:Tridion.Logging.LoggingCategory.Configuration">
+            <summary>
+            Used for throwning exceptions that have to do with configuration.
+            </summary>
+        </member>
+        <member name="F:Tridion.Logging.LoggingCategory.Logging">
+            <summary>
+            Used for throwing exceptions that have to do with logging.
+            </summary>
+        </member>
+        <member name="F:Tridion.Logging.LoggingCategory.Licensing">
+            <summary>
+            Used for throwing exceptions that have to do with licensing.
+            </summary>
+        </member>
+        <member name="F:Tridion.Logging.LoggingCategory.Localization">
+            <summary>
+            Used for throwing exceptions that have to do with localization.
+            </summary>
+        </member>
+        <member name="F:Tridion.Logging.LoggingCategory.ApplicationMonitoring">
+            <summary>
+            Used for throwing exceptions that have to do with application monitoring.
+            </summary>
+        </member>
+        <member name="T:Tridion.Logging.Logger">
+            <summary>
+            Instance based class to write log messages based on a given configuration. Messages are routed based on category. 
+            </summary>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Initialize">
+            <summary>
+            Create a new LogWriter based on the configuration
+            </summary>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(Tridion.TridionException,System.String)">
+            <summary>
+            Writes the specified <see cref="T:Tridion.TridionException"/> to a log.
+            </summary>
+            <param name="exception">The <see cref="T:Tridion.TridionException"/> that will be logged.</param>
+            <param name="component">The component that logs this exception.</param>
+            <remarks>The LogEntry will have the following extended properties: category, username, stacktrace and errorcode</remarks>
+            <example>This example shows how to use the Logger.Write method.
+            <code language="C#">
+            <![CDATA[
+            using System;
+            using Tridion;
+            using Tridion.ContenManager;
+            using Tridion.Logging;
+            
+            class MySample
+            {
+                public static void Main()
+                {
+                    try
+                    {
+                        Page page = new Page( new TcmUri( "tcm:999999999-0-1" );
+                    }
+                    catch( TridionException exception )
+                    {
+                        Logger.Write( exception, "test application" );
+                    }
+                }
+            }
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(System.String,System.String,System.Enum)">
+            <summary>
+            Writes a message to the log.
+            </summary>
+            <param name="message">The message to write to the log.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="category">Route the message to this category.</param>
+            <remarks>The severity of the message is <seealso cref="F:System.Diagnostics.TraceEventType.Information"/>.</remarks>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(System.String,System.String,System.Enum,System.Diagnostics.TraceEventType)">
+            <summary>
+            Writes a message to the log.
+            </summary>
+            <param name="message">The message to write to the log.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="category">Route the message to this category.</param>
+            <param name="severity">The severity of the message.</param>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(Tridion.Localization.LocalizableMessage,System.String,System.Enum)">
+            <summary>
+            Writes the localized message to the log.
+            </summary>
+            <param name="message">The localized message to write to the log.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="category">Route the message to this category.</param>
+            <remarks>The severity of the message is <seealso cref="F:System.Diagnostics.TraceEventType.Information"/>.</remarks>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(Tridion.Localization.LocalizableMessage,System.String,System.Enum,System.Diagnostics.TraceEventType)">
+            <summary>
+            Writes the localized message to the log.
+            </summary>
+            <param name="message">The localized message to write to the log.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="category">Route the message to this category.</param>
+            <param name="severity">The severity of the message.</param>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(System.Exception,System.String,System.Enum)">
+            <summary>
+            Writes the specified exception to a log.
+            </summary>
+            <param name="exception">The <see cref="T:System.Exception"/> that will be logged.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="category">The category to which this exception is routed.</param>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(System.Exception,System.String,System.Enum,System.Diagnostics.TraceEventType)">
+            <summary>
+            Writes the specified exception to a log.
+            </summary>
+            <param name="exception">The <see cref="T:System.Exception"/> that will be logged.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="category">The category to which this exception is routed.</param>
+            <param name="severity">The severity.</param>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(System.Exception,System.String,System.Enum,System.Enum,System.Diagnostics.TraceEventType)">
+            <summary>
+            Writes the specified exception to a log.
+            </summary>
+            <param name="exception">The <see cref="T:System.Exception"/> that will be logged.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="errorCode">The error code of this exception.</param>
+            <param name="category">The category to which this exception is routed.</param>
+            <param name="severity">The severity.</param>
+        </member>
+        <member name="M:Tridion.Logging.Logger.Write(System.String,System.String,System.String,System.Enum,System.Enum,System.Diagnostics.TraceEventType)">
+            <summary>
+            Writes a LogEntry to the log.
+            </summary>
+            <param name="message">The message to write to the log.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="stackTrace">The stack trace of an exception.</param>
+            <param name="errorCode">The error code of a TridionException.</param>
+            <param name="severity">The severity of the message.</param>
+            <param name="category">Route the message to this category.</param>
+        </member>
+        <member name="T:Tridion.Logging.Tracer">
+            <summary>
+            Represents a performance tracing class to log method entry/exit and duration.
+            </summary>
+            <remarks>
+            <para>Lifetime of the Tracer object will determine the beginning and the end of
+            the trace. The trace message will include, method being traced, start time, end time 
+            and duration.</para>
+            <para>Since Tracer uses the logging block to log the trace message, you can include application
+            data as part of your trace message. Configured items from call context will be logged as
+            part of the message.</para>
+            <para>Trace message will be logged to the log category with the same name as the tracer operation name.
+            You must configure the operation categories, or the catch-all categories, with desired log sinks to log 
+            the trace messages.</para>
+            </remarks>
+        </member>
+        <member name="F:Tridion.Logging.Tracer._startTitle">
+            <summary>
+            Title for operation start Trace messages
+            </summary>
+        </member>
+        <member name="F:Tridion.Logging.Tracer._endTitle">
+            <summary>
+            Title for operation end Trace messages
+            </summary>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.Logging.Tracer"/> class with the given logical operation name.
+            </summary>
+            <remarks>
+            If an existing activity id is already set, it will be kept. Otherwise, a new activity id will be created.
+            </remarks>
+            <param name="operation">The operation for the <see cref="T:Tridion.Logging.Tracer"/></param>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.Finalize">
+            <summary>
+            Releases unmanaged resources and performs other cleanup operations before the <see cref="T:Tridion.Logging.Tracer"/> is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.Dispose">
+            <summary>
+            Causes the <see cref="T:Tridion.Logging.Tracer"/> to output its closing message.
+            </summary>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:Tridion.Logging.Tracer"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing"><see langword="true"/> to release both managed and unmanaged resources; <see langword="false"/>to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.Initialize(System.String)">
+            <summary>
+            Initializes the tracing with the given operation name.
+            </summary>
+            <param name="operation">The operation for the <see cref="T:Tridion.Logging.Tracer"/></param>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.IsTracingEnabled">
+            <summary>
+            Answers whether tracing is enabled.
+            </summary>
+            <returns>True if tracing is enabled.</returns>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.WriteTraceStartMessage(System.String)">
+            <summary>
+            Writes a message to the log when the tracing start with the given title.
+            </summary>
+            <param name="entryTitle">The title entry in the log.</param>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.WriteTraceEndMessage(System.String)">
+            <summary>
+            Write a message to the log when the tracing is finished with the given title.
+            </summary>
+            <param name="entryTitle">The title entry in the log.</param>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.WriteTraceMessage(Tridion.Localization.LocalizableMessage,System.String,System.Diagnostics.TraceEventType)">
+            <summary>
+            Writes a message to the log with a title and the type of trace envent
+            </summary>
+            <param name="message">The message in the log.</param>
+            <param name="entryTitle">The title  in the log.</param>
+            <param name="eventType">The type of event.</param>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.GetExecutingMethodName">
+            <summary>
+            Gets the name of the method that uses this <see cref="T:Tridion.Logging.Tracer"/>.
+            </summary>
+            <returns>The name of the method.</returns>
+        </member>
+        <member name="M:Tridion.Logging.Tracer.GetSecondsElapsed(System.Int64)">
+            <summary>
+            Calculate the seconds from the number of milliseconds
+            </summary>
+            <param name="milliseconds">The number of milliseconds.</param>
+            <returns>Number of seconds.</returns>
+        </member>
+        <member name="T:Tridion.Logging.TridionDebugTraceListener">
+            <summary>
+            Custom trace listener for logging events using the standard <see cref="T:System.Diagnostics.DefaultTraceListener"/>. 
+            </summary>
+            <remarks>Don't use this class, it should only by used by the Enterprise Logging Application block.</remarks>
+        </member>
+        <member name="M:Tridion.Logging.TridionDebugTraceListener.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Tridion.Logging.TridionDebugTraceListener.Write(System.String)">
+            <summary>
+            Writes the specified message to this listener.
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Tridion.Logging.TridionDebugTraceListener.WriteLine(System.String)">
+            <summary>
+            Writes a message to this listner, followed by a line terminator. 
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Tridion.Logging.TridionDebugTraceListener.TraceData(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.Object)">
+            <summary>
+            Writes trace information, a data object and event information to the listener specific output.
+            </summary>
+            <param name="eventCache">A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.</param>
+            <param name="source">A name used to identify the output, typically the name of the application that generated the trace event.</param>
+            <param name="eventType">One of the TraceEventType values specifying the type of event that has caused the trace.</param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="data">The trace data to emit.</param>
+        </member>
+        <member name="T:Tridion.Logging.TridionEventLogTraceListener">
+            <summary>
+            Custom trace listeners for logging events tot the system eventlog. 
+            </summary>
+            <remarks>Don't use this class, it should only by used by the Enterprise Logging Application block.</remarks>
+        </member>
+        <member name="M:Tridion.Logging.TridionEventLogTraceListener.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Tridion.Logging.TridionEventLogTraceListener.Write(System.String)">
+            <summary>
+            Writes the specified message to this listener.
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Tridion.Logging.TridionEventLogTraceListener.WriteLine(System.String)">
+            <summary>
+            Writes a message to this listner, followed by a line terminator. 
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Tridion.Logging.TridionEventLogTraceListener.TraceData(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.Object)">
+            <summary>
+            Writes trace information, a data object and event information to the listener specific output.
+            </summary>
+            <param name="eventCache">A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.</param>
+            <param name="source">A name used to identify the output, typically the name of the application that generated the trace event.</param>
+            <param name="eventType">One of the TraceEventType values specifying the type of event that has caused the trace.</param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="data">The trace data to emit.</param>
+        </member>
+        <member name="T:Tridion.Logging.TridionConsoleTraceListener">
+            <summary>
+            Custom trace listener for logging events using the standard <see cref="T:System.Console"/>. 
+            </summary>
+            <remarks>Don't use this class, it should only by used by the Enterprise Logging Application block.</remarks>
+        </member>
+        <member name="M:Tridion.Logging.TridionConsoleTraceListener.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Tridion.Logging.TridionConsoleTraceListener.Write(System.String)">
+            <summary>
+            Writes the specified message to this listener.
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Tridion.Logging.TridionConsoleTraceListener.WriteLine(System.String)">
+            <summary>
+            Writes a message to this listner, followed by a line terminator. 
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Tridion.Logging.TridionConsoleTraceListener.TraceData(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.Object)">
+            <summary>
+            Writes trace information, a data object and event information to the listener specific output.
+            </summary>
+            <param name="eventCache">A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.</param>
+            <param name="source">A name used to identify the output, typically the name of the application that generated the trace event.</param>
+            <param name="eventType">One of the TraceEventType values specifying the type of event that has caused the trace.</param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="data">The trace data to emit.</param>
+        </member>
+    </members>
+</doc>

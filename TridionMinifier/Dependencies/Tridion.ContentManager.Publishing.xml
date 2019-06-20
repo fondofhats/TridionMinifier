@@ -1,0 +1,2419 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tridion.ContentManager.Publishing</name>
+    </assembly>
+    <members>
+        <member name="T:Tridion.ContentManager.Publishing.ComWrapper.IPublishEngine">
+            <summary>
+            The COM interface for the <see cref="T:Tridion.ContentManager.Publishing.PublishEngine"/> implementation.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ComWrapper.IPublishEngine.Publish(System.String,System.String)">
+            <summary>
+            Creates PublishTransaction(s) to publish items based on the publish instruction.
+            </summary>
+            <param name="username">The account name of the user to impersonate.</param>
+            <param name="publishInstruction">A publish instruction as defined in the system schema.</param>
+            <returns>A PublishResponse as defined in the system schema.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ComWrapper.IPublishEngine.UnPublish(System.String,System.String)">
+            <summary>
+            Creates PublishTransaction(s) to un-publish based on the publish instruction.
+            </summary>
+            <param name="username">The account name of the user to impersonate.</param>
+            <param name="publishInstruction">A publish instruction as defined in the system schema.</param>
+            <returns>A PublishResponse as defined in the system schema.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.ComWrapper.PublishEngineFacade">
+            <summary>
+            Com facade from the <see cref="T:Tridion.ContentManager.Publishing.PublishEngine"/> class.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ComWrapper.PublishEngineFacade.Publish(System.String,System.String)">
+            <summary>
+            Creates PublishTransaction(s) to publish items based on the publish instruction.
+            </summary>
+            <param name="username">The account name of the user to impersonate.</param>
+            <param name="publishInstruction">A publish instruction as defined in the system schema.</param>
+            <returns>A PublishResponse as defined in the system schema.</returns>
+            <remarks>Method is not part of the public API.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ComWrapper.PublishEngineFacade.UnPublish(System.String,System.String)">
+            <summary>
+            Creates PublishTransaction(s) to un-publish items based on the publish instruction.
+            </summary>
+            <param name="username">The account name of the user to impersonate.</param>
+            <param name="publishInstruction">A publish instruction as defined in the system schema.</param>
+            <returns>A PublishResponse as defined in the system schema.</returns>
+            <remarks>Method is not part of the public API.</remarks>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.RenderContext">
+            <summary>
+            Contains information about rendering which can be used across renderers.
+            For example if you you are rendering a <see cref="T:Tridion.ContentManager.CommunicationManagement.Page"/> and on that page you want to render a <see cref="T:Tridion.ContentManager.CommunicationManagement.ComponentPresentation"/>
+            you can pass information to this renderer using this <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/>.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/> class.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderContext.#ctor(Tridion.ContentManager.IdentifiableObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/> class using the specified <see cref="T:Tridion.ContentManager.IdentifiableObject"/>.
+            </summary>
+            <param name="contextItem">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> that is used within this <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/>.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderContext.ContextItem">
+            <summary>
+            Gets and sets the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> that is used in this render context.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderContext.ContextVariables">
+            <summary>
+            Gets the dictionary containing variables used in this context.
+            </summary>
+            <remarks>
+            This dictionary can be used to transfer information between renderers.
+            </remarks>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.RenderException">
+            <summary>
+            The exception that is thrown when a render error occurs.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderException.#ctor(Tridion.Localization.LocalizableMessage,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception. 
+            If the <paramref name="innerException"/> parameter is not a null reference, the current exception is raised in a <c>catch</c> block 
+            that handles the inner exception.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderException.#ctor(Tridion.Localization.LocalizableMessage)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderException.#ctor(Tridion.Localization.LocalizableMessage,System.Enum)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+            <param name="errorCode">The error code</param>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.TaxonomyRenderer">
+            <exclude/>
+            <summary>
+            Renderer implementation for publishing taxonomies.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.IRenderer">
+            <summary>
+            Defines the methods to resolve items.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.IRenderer.Render(Tridion.ContentManager.Publishing.Resolving.ResolvedItem,Tridion.ContentManager.Publishing.PublishInstruction,Tridion.ContentManager.CommunicationManagement.PublicationTarget,Tridion.ContentManager.Publishing.Rendering.RenderedItem,Tridion.ContentManager.Publishing.Rendering.RenderContext)">
+            <summary>
+            Renders the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> based on the <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> and the <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>
+            </summary>
+            <param name="resolvedItem">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> to render.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> needed by the renderer.</param>
+            <param name="target">Render the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> for this <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>. The target can be null.</param>
+            <param name="renderedItem">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> is modified with the result of the render action.</param>
+            <param name="renderContext">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/> that is transfered between renderers. The renderContext can be null.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.TaxonomyRenderer.Render(Tridion.ContentManager.Publishing.Resolving.ResolvedItem,Tridion.ContentManager.Publishing.PublishInstruction,Tridion.ContentManager.CommunicationManagement.PublicationTarget,Tridion.ContentManager.Publishing.Rendering.RenderedItem,Tridion.ContentManager.Publishing.Rendering.RenderContext)">
+            <summary>
+            Renders a <see cref="T:Tridion.ContentManager.ContentManagement.Category"/> according to the <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> and the <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> as a taxonomy.
+            </summary>
+            <param name="resolvedItem">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> containing the <see cref="T:Tridion.ContentManager.ContentManagement.Category"/>.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> needed by the renderer.</param>
+            <param name="target">Render the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> for this <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/></param>
+            <param name="renderedItem">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> is modified with the result of the render action.</param>
+            <param name="renderContext">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/> that is transfered between renderers.</param>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.ResolveException">
+            <summary>
+            The exception that is thrown when a resolve error occurs.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolveException.#ctor(Tridion.Localization.LocalizableMessage,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolveException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception. 
+            If the <paramref name="innerException"/> parameter is not a null reference, the current exception is raised in a <c>catch</c> block 
+            that handles the inner exception.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolveException.#ctor(Tridion.Localization.LocalizableMessage)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolveException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolveException.#ctor(Tridion.Localization.LocalizableMessage,System.Enum)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolveException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+            <param name="errorCode">The error code</param>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.TaxonomyResolveInstruction">
+            <summary>
+            Custom resolve instruction for taxonomies.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.ResolveInstruction">
+            <summary>
+            Represents the instructions needed for resolving.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ResolveInstruction.System#Xml#Serialization#IXmlSerializable#GetSchema">
+            <summary>
+            This property is reserved.
+            </summary>
+            <returns>A <c>null</c> reference.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ResolveInstruction.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/> from its XML representation. 
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/> is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ResolveInstruction.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts this <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/> into its XML representation.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/> is serialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ResolveInstruction.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/> from its XML representation. 
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/> is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ResolveInstruction.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts this <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/> into its XML representation.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/> is serialized.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ResolveInstruction.IncludeComponentLinks">
+            <summary>
+            Gets and sets if the resolving should resolve the component links.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ResolveInstruction.IncludeChildPublications">
+            <summary>
+            Gets and sets if the resolving should resolve items in the child publications.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ResolveInstruction.IncludeWorkflow">
+            <summary>
+            Gets and sets if the resolving should be done from the user's work list.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ResolveInstruction.OnlyPublishedItems">
+            <summary>
+            Gets and sets if the resolving should only return items that are already published.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.TaxonomyResolveInstruction.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            WriteXml implementation of the IXmlSerializable interface
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.TaxonomyResolveInstruction.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            ReadXml implementation of the IXmlSerializable interface.
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.TaxonomyResolveInstruction.IsTaxonomy">
+            <summary>
+            Returns true if this is to be considered a resolve for a taxonomy.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.XmlHelper">
+            <summary>
+            An helper class for the <see cref="N:Tridion.ContentManager.Publishing"/> namespace.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.XmlHelper.Namespace">
+            <summary>
+            The http://www.tridion.com/ContentManager/5.3/Publishing namespace declaration.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.XmlHelper.Prefix">
+            <summary>
+            Default namespace prefix.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.DeployerAction">
+            <summary>
+            Represents the action the deployer needs to take.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.DeployerAction.Commit">
+            <summary>
+            The deployer should commit the tranport package.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.DeployerAction.Wait">
+            <summary>
+            The deployer should wait to commit the transport package.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.DeployerAction.Abort">
+            <summary>
+            The deployer should abort the transport package.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Logger">
+            <summary>
+            Provides methods to write log messages from the <see cref="N:Tridion.ContentManager.Publishing"/> namespace. 
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Logger.Write(System.Exception)">
+            <summary>
+            Writes the specified exception to a log.
+            </summary>
+            <param name="exception">The <see cref="T:System.Exception"/> that will be logged.</param>
+            <remarks>The category is <see cref="F:Tridion.ContentManager.LogCategory.Publishing"/> and the component is <value>Publisher</value>.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Logger.Write(System.Exception,System.String,System.Enum)">
+            <summary>
+            Writes the specified exception to a log.
+            </summary>
+            <param name="exception">The <see cref="T:System.Exception"/> that will be logged.</param>
+            <param name="component">The component that logs this exception.</param>
+            <param name="category">The category to which this exception is routed.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Logger.Verbose(System.String)">
+            <summary>
+            Writes the specified debugging message to a log.
+            </summary>
+            <param name="message">The message to write to the log.</param>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.ProcessedItem">
+            <summary>
+            Represents a <see cref="P:Tridion.ContentManager.Publishing.ProcessedItem.ResolvedItem"/> with render information.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.#ctor(Tridion.ContentManager.Publishing.Resolving.ResolvedItem)">
+            <summary>
+            Initializes a new <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> with a specified <see cref="P:Tridion.ContentManager.Publishing.ProcessedItem.ResolvedItem"/>.
+            </summary>
+            <param name="resolvedItem">A <see cref="P:Tridion.ContentManager.Publishing.ProcessedItem.ResolvedItem"/> for which 
+            to store additional rendering information.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.#ctor(Tridion.ContentManager.Publishing.Rendering.RenderedItem)">
+            <summary>
+            Initializes a new <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> with a specified <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>.
+            </summary>
+            <param name="renderedItem">A <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> for which to store additional rendering information.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.#ctor(Tridion.ContentManager.Publishing.Resolving.ResolvedItem,System.Exception)">
+            <summary>
+            Initializes a new <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> with a specified <see cref="P:Tridion.ContentManager.Publishing.ProcessedItem.ResolvedItem"/> with a render exception.
+            </summary>
+            <param name="resolvedItem">A <see cref="P:Tridion.ContentManager.Publishing.ProcessedItem.ResolvedItem"/> for which to store a render exception.</param>
+            <param name="renderException">The <see cref="T:System.Exception"/> that caused the render failure.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/>.
+            </summary>
+            <remarks>A class that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable"/> interface must have a 
+            parameterless constructor. This is a requirement of the <see cref="T:System.Xml.Serialization.XmlSerializer"/> class.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.InitializeDeserializedProcessedItem(Tridion.ContentManager.Session)">
+            <summary>
+            Must be called when the <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> is generated from its Xml representation. 
+            It creates the <see cref="P:Tridion.ContentManager.Publishing.ProcessedItem.ResolvedItem"/> based on the serialized item id and the template id.
+            </summary>
+            <param name="session">The <see cref="T:Tridion.ContentManager.Session"/> used for retrieving the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> and the <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.System#Xml#Serialization#IXmlSerializable#GetSchema">
+            <summary>
+            This method is needed by the XmlSerialization. It has no implementation and always returns null.
+            </summary>
+            <returns>null.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> instance from its XML representation
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the object is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts a <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> instance into its XML representation
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Serializes the ProcessedItems object to Xml.
+            </summary>
+            <param name="writer">XmlWriter to add the Xml nodes to.</param>
+            <remarks>
+            Since the basic XmlSerialization doesn't support read-only properties, we implement IXmlSerializable.
+            This means the WriteXml method needs to be implemented to do the serialization.
+            The writer that is passed in already contains a prefix-less top element.
+            The serialized xml therefore uses the Tridion namespace as default namespaces.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            De-serializes the reader's Xml into a ProcessedItem object.
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.Update(System.TimeSpan,System.Boolean)">
+            <summary>
+            Updates the <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> with a render time and render state.
+            </summary>
+            <param name="renderTime">A <see cref="T:System.TimeSpan"/> that represents the
+            duration of the rendering process.</param>
+            <param name="isRendered">A <see cref="T:System.Boolean"/> that indicates whether
+            the item was rendered.</param>
+            <remarks>This method is used by <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> to parse 
+            old-style publisher requests.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.Update(System.TimeSpan,System.Boolean,System.String)">
+            <summary>
+            Updates the <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> with a render time, render state
+            and a reason of failure.
+            </summary>
+            <param name="renderTime">A <see cref="T:System.TimeSpan"/> that represents the
+            duration of the rendering process.</param>
+            <param name="isRendered">A <see cref="T:System.Boolean"/> that indicates whether
+            the item was rendered.</param>
+            <param name="reasonOfRenderFailure">A <see cref="T:System.String"/> that holds
+            the reason of failure of the rendering process.</param>
+            <remarks>This method is used by <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> to parse 
+            old-style publisher requests.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.ProcessedItem.CreateVersionZeroLessUri(Tridion.ContentManager.TcmUri)">
+            <summary>
+            Create a TcmUri without a version.
+            </summary>
+            <param name="uri">A TcmUri with or without a version.</param>
+            <returns>A TcmUri without a version.</returns>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ProcessedItem.ResolvedItem">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.ProcessedItem.ResolvedItem"/> for which this class stores additional rendering
+            information.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ProcessedItem.RenderTime">
+            <summary>
+            Gets the duration of the rendering process for the processed item.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ProcessedItem.IsRendered">
+            <summary>
+            Gets a <see cref="T:System.Boolean"/> value that indicates whether the processed item was rendered.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ProcessedItem.HasRenderFailure">
+            <summary>
+            Gets a <see cref="T:System.Boolean"/> value that indicates whether the processed item failed rendering.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.ProcessedItem.ReasonOfRenderFailure">
+            <summary>
+            The reason of failure of the rendering process.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublishContext">
+            <summary>
+            Represents the combination of a <see cref="P:Tridion.ContentManager.Publishing.PublishContext.Publication"/> and <see cref="P:Tridion.ContentManager.Publishing.PublishContext.PublicationTarget"/> 
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishContext.#ctor(Tridion.ContentManager.CommunicationManagement.Publication,Tridion.ContentManager.CommunicationManagement.PublicationTarget)">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> class.
+            </summary>
+            <param name="publication">The <see cref="P:Tridion.ContentManager.Publishing.PublishContext.Publication"/> this <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> belongs to.</param>
+            <param name="publicationTarget">The <see cref="P:Tridion.ContentManager.Publishing.PublishContext.PublicationTarget"/> this <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> belongs to.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishContext.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishContext.Equals(Tridion.ContentManager.Publishing.PublishContext)">
+            <summary>
+            Indicates whether the current <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> is equal to another <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>.
+            </summary>
+            <param name="other">An <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> to compare with this <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>.</param>
+            <returns>True if the current <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> is equal to the other parameter; otherwise, false.</returns>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishContext.Publication">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.PublishContext.Publication"/>
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishContext.PublicationTarget">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.PublishContext.PublicationTarget"/>
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublishEngine">
+            <summary>
+            The engine that is responsible for publishing items of type <see cref="T:Tridion.ContentManager.IdentifiableObject"/>.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishEngine._isPublishStateEventEnabled">
+            <summary>
+            Specifies whether events have been enabled for setting the Publish state.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.#cctor">
+            <summary>
+            Verifies whether events are enabled for setting the Publish state.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.Publish(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.PublishInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.PublicationTarget},Tridion.ContentManager.Publishing.PublishPriority)">
+            <summary>
+            Publishes, re-publishes and/or deploys the <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s and related items to given <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>s.
+            </summary>
+            <param name="items">A non-generic collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s to publish.</param>
+            <param name="publishInstruction">The instruction for the publish action.</param>
+            <param name="publicationTargets">A non-generic collection of <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> instances where the rendered items are published to.</param>
+            <param name="priority">The priority of the publish action.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/></returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.Publish(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.PublishInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.PublicationTarget})">
+            <summary>
+            Publishes, re-publishes and/or deploys the <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s and related items to given <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>s.
+            </summary>
+            <param name="items">A non-generic collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s to publish.</param>
+            <param name="publishInstruction">The instruction for the publish action.</param>
+            <param name="publicationTargets">A non-generic collection of <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> instances where the rendered items are published to.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/></returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.Publish(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.PublishInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.TargetType},Tridion.ContentManager.Publishing.PublishPriority)">
+            <summary>
+            Publishes, re-publishes and/or deploys the <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s and related items to given <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/>s.
+            </summary>
+            <param name="items">A non-generic collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s to publish.</param>
+            <param name="publishInstruction">The instruction for the publish action.</param>
+            <param name="targetTypes">A non-generic collection of <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/> instances where the rendered items are published to.</param>
+            <param name="priority">The priority of the publish action.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/></returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.Publish(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.PublishInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.TargetType})">
+            <summary>
+            Publishes, re-publishes and/or deploys the <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s and related items to given <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/>s.
+            </summary>
+            <param name="items">A non-generic collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s to publish.</param>
+            <param name="publishInstruction">The instruction for the publish action.</param>
+            <param name="targetTypes">A non-generic collection of <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/> instances where the rendered items are published to.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/></returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.UnPublish(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.UnPublishInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.PublicationTarget},Tridion.ContentManager.Publishing.PublishPriority)">
+            <summary>
+            Un-publishes and/or deploys the collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/> instances 
+            and related items to the number of specified <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> instances.
+            </summary>
+            <param name="items">A non-generic collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s to publish.</param>
+            <param name="unPublishInstruction">The instruction for the un-publish action.</param>
+            <param name="publicationTargets">A non-generic collection of <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> instances where the rendered items are published to.</param>
+            <param name="priority">The priority of the un-publish action.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/></returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.UnPublish(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.UnPublishInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.PublicationTarget})">
+            <summary>
+            Un-publishes and/or deploys the collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/> instances 
+            and related items to the number of specified <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> instances.
+            </summary>
+            <param name="items">A non-generic collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s to publish.</param>
+            <param name="unPublishInstruction">The instruction for the un-publish action.</param>
+            <param name="publicationTargets">A non-generic collection of <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> instances where the rendered items are published to.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/></returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.UnPublish(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.UnPublishInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.TargetType},Tridion.ContentManager.Publishing.PublishPriority)">
+            <summary>
+            Un-publishes and/or deploys the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> instances and related 
+            items to the number of specified <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/> instances.
+            </summary>
+            <param name="items">A non-generic collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s to publish.</param>
+            <param name="unPublishInstruction">The instruction for the publish action.</param>
+            <param name="targetTypes">A non-generic collection of <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/> instances where the rendered items are published to.</param>
+            <param name="priority">The priority of the un-publish action.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/></returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.UnPublish(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.UnPublishInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.TargetType})">
+            <summary>
+            Un-publishes and/or deploys the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> instances and related 
+            items to the number of specified <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/> instances.
+            </summary>
+            <param name="items">A non-generic collection of <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s to publish.</param>
+            <param name="unPublishInstruction">The instruction for the publish action.</param>
+            <param name="targetTypes">A non-generic collection of <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/> instances where the rendered items are published to.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/></returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.IsPublished(Tridion.ContentManager.IdentifiableObject)">
+            <summary>
+            Returns whether the given item is published at any <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to test for its publish state.</param>
+            <returns>true if the given item is published at any
+            <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>; otherwise, false.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.IsPublished(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.CommunicationManagement.PublicationTarget)">
+            <summary>
+            Returns whether the given item is published at the specified <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to test for its publish state.</param>
+            <param name="publicationTarget">The <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> at which to test
+            for the item's publish state.</param>
+            <returns>true if the given item is published at the 
+            specified <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>; otherwise, false.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.GetPublishState(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.CommunicationManagement.PublicationTarget)">
+            <summary>
+            Returns whether the given item is published at the specified <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to test for its publish state.</param>
+            <param name="publicationTarget">The <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> at which to test
+            for the item's publish state.</param>
+            <returns>true if the given item is published at the 
+            specified <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>; otherwise, false.</returns>
+            <remarks>When a <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> is not specified, the value will be false 
+            if it is not published at one of the valid Publication Targets.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.GetPublishInfo(Tridion.ContentManager.IdentifiableObject)">
+            <summary>
+            Gets the publish information collection used to store additional information
+            about the published items.
+            </summary>
+            <param name="item">A <see cref="T:Tridion.ContentManager.IdentifiableObject"/> for which to get 
+            additional publish information.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishInfo"/> objects.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.SetPublishState(System.Collections.Generic.IEnumerable{Tridion.ContentManager.Publishing.ProcessedItem},System.Boolean,Tridion.ContentManager.CommunicationManagement.PublicationTarget,Tridion.ContentManager.Security.User)">
+            <summary>
+            Sets the publish state for the processed items for the 
+            specified <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> by the specified <see cref="T:Tridion.ContentManager.Security.User"/>.
+            </summary>
+            <param name="processedItems">A list of <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> objects.</param>
+            <param name="isPublished">A <see cref="T:System.Boolean"/> that indicates whether the 
+            processed items are published.</param>
+            <param name="publicationTarget">A <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> to which the 
+            processed items are published.</param>
+            <param name="publisher">A <see cref="T:Tridion.ContentManager.Security.User"/> who published the processed items.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.ParsePublishInfoList(System.String,Tridion.ContentManager.CommunicationManagement.Publication)">
+            <summary>
+            Parses the Xml that contains publish information into PublishInfo objects.
+            </summary>
+            <param name="listXml">A <see cref="T:System.String"/> that contains a list of PublishInfo elements.</param>
+            <param name="publication">The context <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> of the item.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishInfo"/> objects.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.CreatePublishTransactions(System.Collections.Generic.IEnumerable{Tridion.ContentManager.IdentifiableObject},Tridion.ContentManager.Publishing.PublishInstructionBase,System.Collections.IEnumerable,System.Nullable{Tridion.ContentManager.Publishing.PublishPriority})">
+            <summary>
+            Gets a collection of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> instances for the 
+            specified items and targets based on the specified instruction.
+            </summary>
+            <param name="items"></param>
+            <param name="instruction"></param>
+            <param name="targets"></param>
+            <param name="priority"></param>
+            <returns>A collection that holds a list of <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> instances.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.ParseLegacyInstruction(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.Publishing.PublishInstructionBase,System.Nullable{Tridion.ContentManager.Publishing.PublishPriority},System.Collections.IEnumerable)">
+            <summary>
+            Parses a publish or unpublish instruction compatible with the TCM 5.x system schema.
+            </summary>
+            <param name="item"></param>
+            <param name="instruction"></param>
+            <param name="priority"></param>
+            <param name="targets"></param>
+            <returns>A <see cref="T:System.String"/> that holds the publish or unpublish instruction as XML.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.AssertObjectIsPublishable(Tridion.ContentManager.IdentifiableObject)">
+            <summary>
+            Validates whether the <see cref="T:Tridion.ContentManager.PublishableAttribute"/> is applied to the 
+            class and specifies that the class is publishable.
+            </summary>
+            <param name="item">An <see cref="T:Tridion.ContentManager.IdentifiableObject"/> that
+            is to be validated.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishEngine.CreatePublishTransactionsUsingLegacyBl(Tridion.ContentManager.Session,System.String)">
+            <summary>
+            Creates PublishTransaction(s) based on the legacy PublishInstruction using the Legacy business layer.
+            </summary>
+            <param name="session">The Session that contains the UserContext.</param>
+            <param name="legacyPublishInstruction">The legacy PublishInstruction defined in the system schema.</param>
+            <returns>A string containing the PublishReponse.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublisherException">
+            <summary>
+            The exception that is thrown when a Publisher error occurs.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublisherException.#ctor(Tridion.Localization.LocalizableMessage,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.PublisherException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception. 
+            If the <paramref name="innerException"/> parameter is not a null reference, the current exception is raised in a <c>catch</c> block 
+            that handles the inner exception.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublisherException.#ctor(Tridion.Localization.LocalizableMessage)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.PublisherException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublishInfo">
+            <summary>
+            Provides information regarding a published item.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInfo.#ctor(Tridion.ContentManager.CommunicationManagement.Publication,Tridion.ContentManager.CommunicationManagement.PublicationTarget,System.DateTime,Tridion.ContentManager.Security.User,Tridion.ContentManager.CommunicationManagement.Template)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.PublishInfo"/> class by using the specified 
+            Publication, Publication Target, date and time at which the item was published, user 
+            who published the item and with which Template the item was rendered.
+            </summary>
+            <param name="publication">A <see cref="P:Tridion.ContentManager.Publishing.PublishInfo.Publication"/> from which the item is published.</param>
+            <param name="publicationTarget">A <see cref="P:Tridion.ContentManager.Publishing.PublishInfo.PublicationTarget"/> to which the item was published.</param>
+            <param name="publishedAt">A <see cref="T:System.DateTime"/> at which the item was published.</param>
+            <param name="publishedBy">A <see cref="T:Tridion.ContentManager.Security.User"/> by which the item was published.</param>
+            <param name="renderedWith">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> that was used to render the item.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInfo.Publication">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.PublishInfo.Publication"/> from which the item was published.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInfo.PublicationTarget">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.PublishInfo.PublicationTarget"/> to which the item was published.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInfo.PublishedAt">
+            <summary>
+            Gets the <see cref="T:System.DateTime"/> at which the item was published.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInfo.PublishedBy">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.Security.User"/> by which the item was published.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInfo.RenderedWith">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> with which the item was rendered.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublishInstruction">
+            <summary>
+            Represents the instructions needed for publishing an <see cref="T:Tridion.ContentManager.IdentifiableObject"/>.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublishInstructionBase">
+            <summary>
+            The base class for the publish instructions.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInstructionBase.System#Xml#Serialization#IXmlSerializable#GetSchema">
+            <summary>
+            This property is reserved.
+            </summary>
+            <returns>A <c>null</c> reference.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInstructionBase.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/> from its XML representation. 
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/> is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInstructionBase.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts this <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/> into its XML representation.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/> is serialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInstructionBase.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/> from its XML representation. 
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/> is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInstructionBase.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts this <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/> into its XML representation.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/> is serialized.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInstructionBase.StartAt">
+            <summary>
+            Gets and sets the date time of the when the <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> should be started.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInstructionBase.ResolveInstruction">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.PublishInstructionBase.ResolveInstruction"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInstructionBase.RollbackOnFailure">
+            <summary>
+            Gets and sets if the <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> should be rolled back when there is a failure during deployment.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInstruction.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/>.
+            </summary>
+            <remarks>A class that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable"/> interface must have a 
+            parameterless constructor. This is a requirement of the <see cref="T:System.Xml.Serialization.XmlSerializer"/> class.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInstruction.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> from its XML representation. 
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishInstruction.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts this <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> into its XML representation.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> is serialized.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInstruction.RenderInstruction">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.PublishInstruction.RenderInstruction"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInstruction.DeployAt">
+            <summary>
+            Gets and sets the date time when the content should be deployed at the content delivery side.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishInstruction.MaximumNumberOfRenderFailures">
+            <summary>
+            Gets and sets the maximum number of render failures when the <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> fails.
+            </summary>
+            <remarks>PublishTransaction will fail if the number of render failures exceeds the MaximumNumberOfRenderFailures, default = 0.</remarks>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublishPriority">
+            <summary>
+            Identifies the priority of the publish action.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishPriority.Low">
+            <summary>
+            Low priority.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishPriority.Normal">
+            <summary>
+            Normal priority.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishPriority.High">
+            <summary>
+            High priority.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublishTransaction">
+            <summary>
+            Represents the transaction during the publishing process.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishTransaction.#ctor(Tridion.ContentManager.TcmUri,Tridion.ContentManager.Session)">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> class.
+            </summary>
+            <param name="id">The Tcm Uri of an existing <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/>.</param>
+            <param name="session">Use this <see cref="T:Tridion.ContentManager.Session"/> to get retrieve the <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/>.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishTransaction.#ctor(System.Xml.XmlElement,Tridion.ContentManager.Session)">
+            <summary>
+            Create an instance based on an existing XML representation
+            </summary>
+            <param name="xmlRepresentation">The XML representation to be used as state of the object.</param>
+            <param name="session">The Session in which the object should be created.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishTransaction.GetListProcessedItems(Tridion.ContentManager.Publishing.PublishContext)">
+            <summary>
+            Gets a list of <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> for this <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>
+            </summary>
+            <param name="context">The <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> are part of this<see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>.</param>
+            <returns>A list of <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishTransaction.UpdateProcessedItems(Tridion.ContentManager.Publishing.PublishContext,System.Collections.Generic.List{Tridion.ContentManager.Publishing.ProcessedItem})">
+            <summary>
+            Updates the list of <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> with this new list.
+            </summary>
+            <param name="context">The new list of <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> are belonging to this <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>.</param>
+            <param name="processedItems">The new list of <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/></param>
+            <remarks>Sets the <see cref="P:Tridion.ContentManager.Publishing.PublishTransaction.HasRenderFailures"/> property to <c>true</c> when
+            one of the processed items has failed rendering.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishTransaction.Save">
+            <summary>
+            Saves this <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/>.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishTransaction.UpdatePublisherRequest">
+            <summary>
+            Updates the publisher request Xml with the new list of processed items and deployer request.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishTransaction.ParseProcessedItems">
+            <summary>
+            Parses the publisher request Xml and makes a list of <see cref="T:Tridion.ContentManager.Publishing.ProcessedItem"/> instances.
+            </summary>
+            <remarks>Sets the <see cref="P:Tridion.ContentManager.Publishing.PublishTransaction.HasRenderFailures"/> property to <c>true</c> when
+            one of the processed items has failed rendering.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.PublishTransaction.ParsePublishInstruction">
+            <summary>
+            Parses the Instruction which is a type derived from <see cref="T:Tridion.ContentManager.Publishing.PublishInstructionBase"/>.
+            </summary>
+            <remarks>
+            If the PublisherRequest contains an Instruction element, it can be deserialized
+            to a type directly. If it is the old format, a <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> or 
+            <see cref="T:Tridion.ContentManager.Publishing.UnPublishInstruction"/> is expected.
+            </remarks>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.DeployerAction">
+            <summary>
+            Gets the action the deployer should take.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.Items">
+            <summary>
+            Get a readonly collection of items that needs to be published/unpublished.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.Information">
+            <summary>
+            Get the information about this <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.Priority">
+            <summary>
+            Gets the priority of this <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/>
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.HasRenderFailures">
+            <summary>
+            Gets a value that indicates whether one of the processed items has failed rendering.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.PublishContexts">
+            <summary>
+            Gets a readonly collection of <see cref="P:Tridion.ContentManager.Publishing.PublishTransaction.PublishContexts"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.State">
+            <summary>
+            Gets or sets the state of this <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.StateChangeDateTime">
+            <summary>
+            Gets the date time when the last state change occurred.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.Instruction">
+            <summary>
+            Gets the instruction of this <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/>/
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.PublishTransaction.Creator">
+            <summary>
+            Gets to user who created this <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> by publishing item(s) with the <see cref="T:Tridion.ContentManager.Publishing.PublishEngine"/>.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.PublishTransactionState">
+            <summary>
+            Represents the states a <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> can have.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishTransactionState.ScheduledForPublish">
+            <summary>
+            The <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> is scheduled to start at the specified date time. 
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishTransactionState.WaitingForPublish">
+            <summary>
+            The <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> is waiting to be processed. 
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishTransactionState.InProgress">
+            <summary>
+            The <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> is currently in progess. 
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishTransactionState.ScheduledForDeployment">
+            <summary>
+            The <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> is scheduled to be deployed at the specified date time. 
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishTransactionState.WaitingForDeployment">
+            <summary>
+            The <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> is waiting to be deployed at the specified date time. 
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishTransactionState.Failed">
+            <summary>
+            The <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> failed. 
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishTransactionState.Succes">
+            <summary>
+            The <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> succeeded.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.PublishTransactionState.Warning">
+            <summary>
+            The <see cref="T:Tridion.ContentManager.Publishing.PublishTransaction"/> succeeded but contains warnings.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.Binary">
+            <summary>
+            Represents a binary on disk.
+            </summary>
+            <seealso cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(Tridion.ContentManager.CommunicationManagement.StructureGroup,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified
+            <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> and <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/>.
+            </summary>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> that represents the path and url of the binary.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+            <remarks>This is a generic constructor called by the other constructors.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(Tridion.ContentManager.CommunicationManagement.Publication,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified
+            <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> and <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/>.
+            </summary>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that represents the path and url of the binary.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+            <remarks>
+            This is a generic constructor called by the other constructors.
+            The old legacy PublishBinary uses the path and url from the <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/>.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(Tridion.ContentManager.ContentManagement.Component,Tridion.ContentManager.CommunicationManagement.StructureGroup,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified 
+            <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>, <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/>.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of 
+            type <see cref="T:Tridion.ContentManager.ContentManagement.ComponentType">ComponentType.Multimedia</see>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> that contains the path and url for the binary.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+            <remarks>
+            The url and path of this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is depended on the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/>.
+            When the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/> is Publish the url and path of the <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> is used, 
+            otherwise the default value "Preview" is used as the path and url.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(Tridion.ContentManager.ContentManagement.Component,Tridion.ContentManager.CommunicationManagement.Publication,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of 
+            type <see cref="T:Tridion.ContentManager.ContentManagement.ComponentType">ComponentType.Multimedia</see>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that contains the path and url for the binary.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+            <remarks>
+            The url and path of this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is depended on the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/>.
+            When the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/> is Publish the url and path of the <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> is used, 
+            otherwise the default value "Preview" is used as the path and url.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(Tridion.ContentManager.ContentManagement.Component,Tridion.ContentManager.CommunicationManagement.StructureGroup,System.String,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified 
+            <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>, <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/>.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of 
+            type <see cref="T:Tridion.ContentManager.ContentManagement.ComponentType">ComponentType.Multimedia</see>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> that contains the path and url for the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> that contains an identifier for the
+            binary. The size limit is 64 characters and only a-z, A-Z, 0-9 and - are allowed.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+            <remarks>
+            The url and path of this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is depended on the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/>.
+            When the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/> is Publish the url and path of the <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> is used, 
+            otherwise the default value "Preview" is used as the path and url.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(Tridion.ContentManager.ContentManagement.Component,Tridion.ContentManager.CommunicationManagement.Publication,System.String,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of 
+            type <see cref="T:Tridion.ContentManager.ContentManagement.ComponentType">ComponentType.Multimedia</see>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that contains the path and url for the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> that contains an identifier for the
+            binary. The size limit is 64 characters and only a-z, A-Z, 0-9 and - are allowed.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+            <remarks>
+            The url and path of this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is depended on the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/>.
+            When the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/> is Publish the url and path of the <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> is used, 
+            otherwise the default value "Preview" is used as the path and url.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(Tridion.ContentManager.ContentManagement.Component,Tridion.ContentManager.CommunicationManagement.Publication,Tridion.ContentManager.Publishing.RenderInstruction,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified 
+            <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>, <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> and uses a file for the binary content instead of the 
+            content of the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of 
+            type <see cref="T:Tridion.ContentManager.ContentManagement.ComponentType">ComponentType.Multimedia</see>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that contains the path and url for the binary.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/>.</param>
+            <param name="filePath">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> uses the content of this file as its content instead of the content of the multi media component.</param>
+            <param name="variantId">A <see cref="T:System.String"/> that contains an identifier for the
+            binary. The size limit is 64 characters and only a-z, A-Z, 0-9 and - are allowed.</param>
+            <remarks>
+            This constructor is used by the legacy renderers. The rendered output xml contains a reference to the file.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(System.IO.Stream,System.String,Tridion.ContentManager.CommunicationManagement.StructureGroup,System.String,Tridion.ContentManager.ContentManagement.Component,System.String,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified
+            <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> ID, publish URL and path, filename, MIME type, 
+            binary ID and the ID of a related <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="content">A <see cref="T:System.IO.Stream"/> that contains the content for this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</param>
+            <param name="filename">The name of the file used to store the content.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> that contains the path and url for the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> that contains an identifier for the
+            binary. The size limit is 64 characters and only a-z, A-Z, 0-9 and - are allowed.</param>
+            <param name="relatedComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> that is related
+            to this binary (e.g. the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is a thumbnail that was
+            generated from the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>).</param>
+            <param name="mimeType">The MIME type of the content.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(System.IO.Stream,System.String,Tridion.ContentManager.CommunicationManagement.Publication,System.String,Tridion.ContentManager.ContentManagement.Component,System.String,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified
+            <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> ID, publish URL and path, filename, MIME type, 
+            binary ID and the ID of a related <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="content">A <see cref="T:System.IO.Stream"/> that contains the content for this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</param>
+            <param name="filename">The name of the file used to store the content.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that contains the path and url for the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> that contains an identifier for the
+            binary. The size limit is 64 characters and only a-z, A-Z, 0-9 and - are allowed.</param>
+            <param name="relatedComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> that is related
+            to this binary (e.g. the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is a thumbnail that was
+            generated from the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>).</param>
+            <param name="mimeType">The MIME type of the content.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(System.String,Tridion.ContentManager.CommunicationManagement.StructureGroup,System.String,Tridion.ContentManager.ContentManagement.Component,System.String,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified
+            <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> ID, publish URL and path, filename, MIME type, 
+            binary ID and the ID of a related <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="filePath">The file containing the content for this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> that contains the path and url for the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> that contains an identifier for the
+            binary. The size limit is 64 characters and only a-z, A-Z, 0-9 and - are allowed.</param>
+            <param name="relatedComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> that is related
+            to this binary (e.g. the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is a thumbnail that was
+            generated from the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>).</param>
+            <param name="mimeType">The MIME type of the content.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+            <remarks>
+            This constructor is used by the legacy renderers. The rendered output xml contains a reference to the file.
+            The filename is retrieved from the filePath.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.#ctor(System.String,Tridion.ContentManager.CommunicationManagement.Publication,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> class using the specified file and location.
+            </summary>
+            <param name="filePath">The file containing the content for this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that contains the path and url for the binary.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+            <remarks>
+            This constructor is used by the legacy renderer fors the PublishBinary method with a byte array.
+            The filename is retrieved from the filePath.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.ParseLocationProperties(System.String,System.String,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Parses the specified location properties of a binary.
+            </summary>
+            <param name="url">The URL at which the binary is stored, starting with a forward slash.</param>
+            <param name="path">The path at which the binary is stored, starting with a backward slash.</param>
+            <param name="renderInstruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> containing the binary storage location and the <see cref="T:Tridion.ContentManager.Publishing.RenderMode"/></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.ParseMultiMediaComponent(Tridion.ContentManager.ContentManagement.Component)">
+            <summary>
+            Parses the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> and retrieves its filename and mime type
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of 
+            type <see cref="T:Tridion.ContentManager.ContentManagement.ComponentType">ComponentType.Multimedia</see>.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Binary.AssertValidVariantId(System.String)">
+            <summary>
+            Throws an exception when the <paramref name="variantId"/> size limit is larger then 64 
+            or contains characters other then a-z, A-Z, 0-9 or -.
+            </summary>
+            <param name="variantId"></param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.ComponentId">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.TcmUri"/> of the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of 
+            type <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/>.
+            </summary>
+            <value>A <see cref="T:Tridion.ContentManager.TcmUri"/> that identifies the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.</value>
+            <remarks>This property accepts a value of <see cref="P:Tridion.ContentManager.TcmUri.UriNull"/> which indicates there is no 
+            associated <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.</remarks>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.VariantId">
+            <summary>
+            Gets the variant identifier that identifies this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.
+            </summary>
+            <value>A <see cref="T:System.String"/> holding the variant identifier.</value>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.LocationId">
+            <summary>
+            Gets the location identifier where this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is stored.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.Url">
+            <summary>
+            Gets the publish URL of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> that starts with a forward slash 
+            and includes the filename.
+            </summary>
+            <value>A <see cref="T:System.String"/> holding the publish URL of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</value>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.Path">
+            <summary>
+            Gets the publish path of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> that starts with a backslash
+            and includes the filename.
+            </summary>
+            <value>A <see cref="T:System.String"/> holding the publish path of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</value>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.Content">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> data as a read-only <see cref="T:System.IO.FileStream"/>.
+            </summary>
+            <value>A read-only <see cref="T:System.IO.FileStream"/> that wraps the binary on disk.</value>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.MimeType">
+            <summary>
+            Gets the MIME type of the binary.
+            </summary>
+            <value>A <see cref="T:System.String"/> holding the MIME type of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</value>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.Filename">
+            <summary>
+            Gets the file name of the binary.
+            </summary>
+            <value>A <see cref="T:System.String"/> holding the file name of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> excluding its path.</value>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.RelatedComponentId">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.TcmUri"/> of the related <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <value>A <see cref="T:Tridion.ContentManager.TcmUri"/> that identifies the related <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.</value>
+            <remarks>This property accepts a value of <see cref="P:Tridion.ContentManager.TcmUri.UriNull"/> which indicates there is no 
+            related <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.</remarks>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Binary.FilePath">
+            <summary>
+            Gets the filename including its path.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.ComWrapper.IRenderEngine">
+            <summary>
+            The COM interface for the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderEngine"/> implementation.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.IRenderEngine.RenderPage(Tridion.ContentManager.Interop.cm_sys.UserContext,System.String,System.String,System.String)">
+            <summary>
+            Renders the page according to the parameters found in the instruction parameter.
+            </summary>
+            <param name="userContext">The page is rendered by this user.</param>
+            <param name="pageXml">The serialized xml of the page.</param>
+            <param name="pageTemplateXml">The serialized xml of the page.</param>
+            <param name="instruction">The instruction needed by the renderer.</param>
+            <returns>The rendered page.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.IRenderEngine.RenderComponentPresenation(Tridion.ContentManager.Interop.cm_sys.UserContext,System.String,System.String,System.String)">
+            <summary>
+            Renders the component presentation according to the parameters found in the instruction parameter.
+            </summary>
+            <param name="userContext">The component presentation is rendered by this user.</param>
+            <param name="componentXml">The serialized xml of the component.</param>
+            <param name="componentTemplateXml">The serialized xml of the component template.</param>
+            <param name="instruction">The instruction needed by the renderer.</param>
+            <returns>The rendered component presenation.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade">
+            <summary>
+            Com facade from the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderEngine"/> class.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.RenderPage(Tridion.ContentManager.Interop.cm_sys.UserContext,System.String,System.String,System.String)">
+            <summary>
+            Renders the page according to the parameters found in the instruction parameter.
+            </summary>
+            <param name="userContext">The page is rendered using this user context.</param>
+            <param name="pageXml">The serialized xml of the page.</param>
+            <param name="pageTemplateXml">The serialized xml of the page template.</param>
+            <param name="instruction">The instruction needed by the renderer.</param>
+            <returns>The rendered page.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.RenderComponentPresenation(Tridion.ContentManager.Interop.cm_sys.UserContext,System.String,System.String,System.String)">
+            <summary>
+            Renders the component presentation according to the parameters found in the instruction parameter.
+            </summary>
+            <param name="userContext">The component presenation is rendered using this user context.</param>
+            <param name="componentXml">The serialized xml of the component.</param>
+            <param name="componentTemplateXml">The serialized xml of the component template.</param>
+            <param name="instruction">The instruction needed by the renderer.</param>
+            <returns>The rendered component presenation.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.RenderItemWithTemplate(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.CommunicationManagement.Template,System.String)">
+            <summary>
+            Renders an <see cref="T:Tridion.ContentManager.IdentifiableObject"/> with a <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> and returns the result in the legacy format
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to render.</param>
+            <param name="template">Render it with this <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/></param>
+            <param name="legacyRenderInstruction">The legacy render instruction.</param>
+            <returns>The render output in legacy Xml format.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.ParseInstruction(System.String,Tridion.ContentManager.Publishing.PublishInstruction@,Tridion.ContentManager.CommunicationManagement.PublicationTarget@,Tridion.ContentManager.Publishing.Rendering.RenderContext@,Tridion.ContentManager.Session)">
+            <summary>
+            Parse the legacy render instruction to a <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> and a <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>
+            </summary>
+            <param name="legacyRenderInstruction">The legacy render instruction.</param>
+            <param name="instruction">This <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> is modified with the one found in the legacy render instruction.</param>
+            <param name="target">This <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> is modified with the one found in the legacy render instruction.</param>
+            <param name="renderContext">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/> that is transfered between renderers. The renderContext can be null.</param>
+            <param name="session"></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.ParseRenderedItemIntoLegacyOutput(Tridion.ContentManager.Publishing.Rendering.RenderedItem,Tridion.ContentManager.Session)">
+            <summary>
+            Parses the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> into the good old legacy Xml format.
+            </summary>
+            <param name="renderedItem">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> to parse.</param>
+            <param name="session"></param>
+            <returns>The rendered output in Xml format.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.ParseComponentPresentationIntoLegacyOutput(Tridion.ContentManager.Publishing.Rendering.RenderedItem,System.Xml.XmlElement,System.Xml.XmlNamespaceManager,Tridion.ContentManager.Session)">
+            <summary>
+            Add a component presentation to the legacy Xml.
+            </summary>
+            <param name="renderedItem">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> that contains the component presentation.</param>
+            <param name="componentPresenations">The reference to the new component presentation to.</param>
+            <param name="nsmgr">The <see cref="T:System.Xml.XmlNamespaceManager"/> needed by the xpaths.</param>
+            <param name="session"></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.ParsePageIntoLegacyOutput(Tridion.ContentManager.CommunicationManagement.Page,System.Xml.XmlElement,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Parses the <see cref="T:Tridion.ContentManager.CommunicationManagement.Page"/> into the legacy Xml format.
+            </summary>
+            <param name="page">The page to parse.</param>
+            <param name="renderedPage">Add the <see cref="T:Tridion.ContentManager.CommunicationManagement.Page"/> information to this reference of the page in the legacy Xml format.</param>
+            <param name="nsmgr">The <see cref="T:System.Xml.XmlNamespaceManager"/> needed by the xpaths.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.ParseBinaryIntoLegacyOutput(Tridion.ContentManager.Publishing.Rendering.RenderedItem,System.Xml.XmlElement,System.Xml.XmlNamespaceManager,Tridion.ContentManager.Session)">
+            <summary>
+            Parses the binaries in the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> into the old legacy Xml format.
+            </summary>
+            <param name="renderedItem">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> containing the binaries.</param>
+            <param name="renderedMultimedias">Add the binary legacy to this rendered multimedias element.</param>
+            <param name="nsmgr">The <see cref="T:System.Xml.XmlNamespaceManager"/> needed by the xpaths.</param>
+            <param name="session"></param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.ComWrapper.RenderEngineFacade.GetContentFromStream(System.IO.Stream,System.Int32)">
+            <summary>
+            Gets the content of a stream and returns it into a string.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to get the content from.</param>
+            <param name="codePage">The codepage to use in the stream.</param>
+            <returns>A string containg the content of the stream.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer">
+            <summary>
+            Represents a renderer within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> class.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> class.
+            </summary>
+            <param name="type">The class name responsible for the rendering.</param>
+            <param name="assembly">The name of the assembly.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer.Type">
+            <summary>
+            Gets and sets the type of the class responsible for the rendering.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer.Assembly">
+            <summary>
+            Gets and sets the assembly of that contains the Renderer
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers">
+            <summary>
+            Represents a collection of renderers within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers.CreateNewElement">
+            <summary>
+            Creates a new <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/>.
+            </summary>
+            <returns>A new <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/>.
+            </summary>
+            <param name="renderer">Get this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/>.</param>
+            <returns>An Object that acts as the key for the specified <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers.Add(Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers"/> to a collection of <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers"/>.
+            </summary>
+            <param name="renderer">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers.BaseAdd(System.Configuration.ConfigurationElement)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> to a collection of <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers"/>.
+            </summary>
+            <param name="renderer">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers.Remove(Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer)">
+            <summary>
+            Removes a <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers"/> from the collection of <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers"/>.
+            </summary>
+            <param name="renderer">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> to remove.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers.RemoveAt(System.Int32)">
+            <summary>
+            Removes the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> at the specified index location.
+            </summary>
+            <param name="index">The index location of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> to remove.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers.CollectionType">
+            <summary>
+            Gets the type of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers"/> collection.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderers.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> at the specified index location. 
+            </summary>
+            <param name="index">The index location of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> to get.</param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.Renderer"/> at the specified index.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderingConfiguration">
+            <summary>
+            Represents the rendering section within a configuration file.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderingConfiguration.Cache">
+            <summary>
+            Get or set the cache settings
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderingConfiguration.Mappings">
+            <summary>
+            Gets and sets the rendering mappings.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderingConfiguration.RenderDcpInContextOfPage">
+            <summary>
+            Gets and sets the if the legacy DynamicComponentPresentation is rendered in context of a Page.
+            </summary>
+            <remarks>
+            This setting is used during publishing.
+            If the legacy DynamicComponentPresentations is rendered in the context of a Page use this one 
+            and don't render it later without the context of a Page.
+            There are implementations that only publish pages with DynamicComponentPresentations and 
+            don't publish the DynamicComponentPresentations separately (will fail if the legacry ComponentTemplate uses the Page object).
+            </remarks>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderingConfiguration.SectionName">
+            <summary>
+            Use this section name to get the rendering configuration from the <see cref="T:System.Configuration.ConfigurationManager"/>
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping">
+            <summary>
+            Represents a mapping between an <see cref="T:Tridion.ContentManager.IdentifiableObject"/>, <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/>and its renderer(s) within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> class.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping.#ctor(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.CommunicationManagement.Template)">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> class.
+            </summary>
+            <param name="item">Get the item type from the <see cref="T:Tridion.ContentManager.IdentifiableObject"/>.</param>
+            <param name="template">Type of the template.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping.ItemType">
+            <summary>
+            Gets and sets the item type of the render mapping.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping.TemplateType">
+            <summary>
+            Gets and sets the template type.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping.Renderers">
+            <summary>
+            Gets the renderers for the specified item type and template type.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings">
+            <summary>
+            Represents a collection of mappings between an <see cref="T:Tridion.ContentManager.IdentifiableObject"/> and <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings.CreateNewElement">
+            <summary>
+            Creates a new <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/>.
+            </summary>
+            <returns>A new <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/>.
+            </summary>
+            <param name="renderMapping">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> to get.</param>
+            <returns>An Object that acts as the key for the specified ResourceElement.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings.Add(Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> to the resolve mappings collection.
+            </summary>
+            <param name="renderMapping">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings.BaseAdd(System.Configuration.ConfigurationElement)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> to a collection of <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings"/>.
+            </summary>
+            <param name="resource">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings.Remove(Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping)">
+            <summary>
+            Removes a <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> from the collection.
+            </summary>
+            <param name="renderMapping">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> to remove.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings.RemoveAt(System.Int32)">
+            <summary>
+            Removes the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> at the specified index location.
+            </summary>
+            <param name="index">The index location of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> to remove.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings.CollectionType">
+            <summary>
+            Gets the type of the render mappings collection.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMappings.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> at the specified index location. 
+            </summary>
+            <param name="index">The index location of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> to get.</param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Configuration.RenderMapping"/> at the specified index.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem">
+            <summary>
+            Represents a rendered item that provides properties and methods to add and retrieve metadata, 
+            global or local instructions and binaries.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.#ctor(Tridion.ContentManager.Publishing.Resolving.ResolvedItem,Tridion.ContentManager.Publishing.RenderInstruction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> class using the specified
+            <see cref="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.ResolvedItem"/>.
+            </summary>
+            <param name="resolvedItem">A <see cref="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.ResolvedItem"/> instance.</param>
+            <param name="renderInstruction">A <see cref="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.RenderInstruction"/> instance.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.Finalize">
+            <summary>
+            Deconstructor
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddMetadata(System.Xml.XmlElement)">
+            <summary>
+            Adds metadata to the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>.
+            </summary>
+            <param name="metadata">An <see cref="T:System.Xml.XmlElement"/> that contains the metadata.</param>
+            <remarks>
+             The <paramref name="metadata"/> parameter can contain any valid XML structure which can be processed at the Content Delivery side.
+             There is no possibility to remove or change the metadataXml once it is added.
+             Adding the same metadata multiple times will show up multiple times and the Content Delivery side.
+             When a Page with a PageTemplate is rendered this added metadata is available on the Page at the Content Delivery side.
+             When a Component with a ComponentTemplate is rendered this added metadata is available on the Page when the ComponentPresentation is embedded,
+             in case of a Dynamic ComponentPresenation the added metadata is available on the ComponentPresentation at the Content Delivery Side.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddInstruction(Tridion.ContentManager.Publishing.Rendering.InstructionScope,System.Xml.XmlElement)">
+            <summary>
+            Adds an instruction to the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> with a specified scope.
+            </summary>
+            <param name="scope">Specifies the scope of the instruction.</param>
+            <param name="instruction">An <see cref="T:System.Xml.XmlElement"/> that specifies a single instruction.</param>
+            <remarks>
+            The <paramref name="instruction"/> parameter can contain any valid XML structure which can be processed at the Content Delivery side.
+            There is no possibility to remove or change the instruction once it is added.
+            Adding the same instruction multiple times will show up multiple times and the Content Delivery side.
+            Adding the instruction with a global scope is available at instruction level at the Content Delivery side.
+            When a <see cref="T:Tridion.ContentManager.CommunicationManagement.Page"/> with a <see cref="T:Tridion.ContentManager.CommunicationManagement.PageTemplate"/> is rendered with adding a local instruction this instruction is available on the Page module at the Content Delivery side.
+            When a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> with a <see cref="T:Tridion.ContentManager.CommunicationManagement.ComponentTemplate"/> is rendered with adding a local instruction this instruction available on the Page module when the <see cref="T:Tridion.ContentManager.CommunicationManagement.ComponentPresentation"/> is embedded,
+            in case of a Dynamic ComponentPresenation the added local instruction is available on the ComponentPresentation module at the Content Delivery Side.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.GetInstructions(Tridion.ContentManager.Publishing.Rendering.InstructionScope)">
+            <summary>
+            Gets the instructions added to the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> by a specified scope.
+            </summary>
+            <param name="scope">Specifies the scope of the instructions to get.</param>
+            <returns>
+            An <see cref="T:System.Xml.XmlNodeList"/> that contains all instructions for the specified scope.
+            </returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(Tridion.ContentManager.ContentManagement.Component,Tridion.ContentManager.CommunicationManagement.StructureGroup)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            specified <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/>.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type 
+            <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> holding the binary.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> holding the path to which
+            the binary will be published.</param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(Tridion.ContentManager.ContentManagement.Component)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            context <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> images path.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type 
+            <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> holding the binary.</param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(Tridion.ContentManager.ContentManagement.Component,Tridion.ContentManager.CommunicationManagement.StructureGroup,System.String)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            specified <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/>.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type 
+            <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> holding the binary.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> holding the path to which
+            the binary will be published.</param>
+            <param name="variantId">A <see cref="T:System.String"/> holding an identifier for the binary.</param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(Tridion.ContentManager.ContentManagement.Component,System.String)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            specified context <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> images path.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type 
+            <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> holding the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> holding an identifier for the binary.</param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(System.IO.Stream,System.String,Tridion.ContentManager.CommunicationManagement.StructureGroup,System.String,Tridion.ContentManager.ContentManagement.Component,System.String)">
+            <summary>
+            Adds binary data as a <see cref="T:System.IO.Stream"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            specified <paramref name="location"/> with the specified <paramref name="filename"/>. The binary
+            can be identified by the specified <paramref name="variantId"/> and is optionally related
+            to a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> holding the path to which
+            the binary will be published.</param>
+            <param name="content">A <see cref="T:System.IO.Stream"/> holding the content of the binary.</param>
+            <param name="filename">A <see cref="T:System.String"/> holding the file name of the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> holding an identifier for the binary.</param>
+            <param name="relatedComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> that is related
+            to this binary (e.g. the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is a thumbnail that was
+            generated from the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>).</param>
+            <param name="mimeType">The MIME type of the <paramref name="content"/></param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(System.IO.Stream,System.String,Tridion.ContentManager.CommunicationManagement.StructureGroup,System.String,System.String)">
+            <summary>
+             Adds binary data as a <see cref="T:System.IO.Stream"/> to the 
+             collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+             specified <paramref name="location"/> with the specified <paramref name="filename"/>. The binary
+             can be identified by the specified <paramref name="variantId"/>. 
+            </summary>
+             <param name="content">A <see cref="T:System.IO.Stream"/> holding the content of the binary.</param>
+             <param name="filename">A <see cref="T:System.String"/> holding the file name of the binary.</param>
+             <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> holding the path to which the binary will be published.</param>
+             <param name="variantId">A <see cref="T:System.String"/> holding an identifier for the binary.</param>
+             <param name="mimeType">The MIME type of the <paramref name="content"/></param>
+             <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(System.IO.Stream,System.String,System.String,Tridion.ContentManager.ContentManagement.Component,System.String)">
+            <summary>
+            Adds binary data as a <see cref="T:System.IO.Stream"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            context <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> images path with the specified <paramref name="filename"/>. The binary
+            can be identified by the specified <paramref name="variantId"/> and is optionally related
+            to a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="content">A <see cref="T:System.IO.Stream"/> holding the content of the binary.</param>
+            <param name="filename">A <see cref="T:System.String"/> holding the file name of the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> holding an identifier for the binary.</param>
+            <param name="relatedComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> that is related
+            to this binary (e.g. the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is a thumbnail that was
+            generated from the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>).</param>
+            <param name="mimeType">The MIME type of the <paramref name="content"/></param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(System.IO.Stream,System.String,System.String,System.String)">
+            <summary>
+            Adds binary data as a <see cref="T:System.IO.Stream"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            context <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> images path with the specified <paramref name="filename"/>. The binary
+            can be identified by the specified <paramref name="variantId"/> and is optionally related
+            to a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="content">A <see cref="T:System.IO.Stream"/> holding the content of the binary.</param>
+            <param name="filename">A <see cref="T:System.String"/> holding the file name of the binary.</param>
+            <param name="variantId">A <see cref="T:System.String"/> holding an identifier for the binary.</param>
+            <param name="mimeType">The MIME type of the <paramref name="content"/></param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instance.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(System.String,Tridion.ContentManager.CommunicationManagement.StructureGroup,System.String,Tridion.ContentManager.ContentManagement.Component,System.String)">
+            <summary>
+            Adds binary data as a <paramref name="filePath"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            specified <paramref name="location"/> with the specified <paramref name="filePath"/>. The binary
+            can be identified by the specified <paramref name="binaryId"/> and is optionally related
+            to a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>.
+            </summary>
+            <param name="filePath">The file containing the content for this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/> that contains the path and url for the binary.</param>
+            <param name="binaryId">A <see cref="T:System.String"/> that contains an identifier for the
+            binary.</param>
+            <param name="relatedComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> that is related
+            to this binary (e.g. the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is a thumbnail that was
+            generated from the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>).</param>
+            <param name="mimeType">The MIME type of the content.</param>
+            <remarks>
+            This constructor is used for by legacy renderer. The rendered output xml contains a reference to the file.
+            The filename is retrieved from the filePath.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(Tridion.ContentManager.ContentManagement.Component,Tridion.ContentManager.CommunicationManagement.Publication,System.String,System.String)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of type <see cref="F:Tridion.ContentManager.ContentManagement.ComponentType.Multimedia"/> to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            specified <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/>.
+            </summary>
+            <param name="multimediaComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> of 
+            type <see cref="T:Tridion.ContentManager.ContentManagement.ComponentType">ComponentType.Multimedia</see>.</param>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that contains the path and url for the binary.</param>
+            <param name="filePath">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> uses the content of this file as its content instead of the content of the multi media component.</param>
+            <param name="variantId">A <see cref="T:System.String"/> holding an identifier for the binary.</param>
+            <remarks>
+            This constructor is used for by legacy renderer. The rendered output xml contains a reference to the file.
+            </remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(Tridion.ContentManager.CommunicationManagement.Publication,System.String)">
+            <summary>
+            Adds a file to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            specified <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/>.
+            </summary>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that contains the path and url for the binary.</param>
+            <param name="filePath">The file containing the content for this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</param>
+            <remarks>
+            This constructor is used for by legacy renderer for the PublishBinary method with a byte array.
+            The filename is retrieved from the filePath.
+            </remarks>        
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddBinary(Tridion.ContentManager.CommunicationManagement.Publication,System.String,System.String,Tridion.ContentManager.ContentManagement.Component,System.String)">
+            <summary>
+            Adds a file to the 
+            collection of binaries of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>. It will be published to the 
+            specified <see cref="T:Tridion.ContentManager.CommunicationManagement.StructureGroup"/>.
+            </summary>
+            <param name="location">A <see cref="T:Tridion.ContentManager.CommunicationManagement.Publication"/> that contains the path and url for the binary.</param>
+            <param name="filePath">The file containing the content for this <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/>.</param>
+            <param name="variantId">A <see cref="T:System.String"/> holding an identifier for the binary.</param>
+            <param name="relatedComponent">A <see cref="T:Tridion.ContentManager.ContentManagement.Component"/> that is related
+            to this binary (e.g. the <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> is a thumbnail that was
+            generated from the <see cref="T:Tridion.ContentManager.ContentManagement.Component"/>).</param>
+            <param name="mimeType">The MIME type of the content.</param>
+            <remarks>
+            This constructor is used for by legacy renderer for the PublishBinary method with a byte array.
+            The filename is retrieved from the filePath.
+            </remarks> 
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.AddRenderedItem(Tridion.ContentManager.Publishing.Rendering.RenderedItem)">
+            <summary>
+            Add a <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> to the list.
+            </summary>
+            <param name="renderedItem">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderedItem.Dispose">
+            <summary>
+            Implementation of the IDisposable interface
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.ResolvedItem">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.ResolvedItem"/> of this <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.RenderInstruction">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.RenderInstruction"/> of this <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.Metadata">
+            <summary>
+            Gets the metadata of the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>.
+            </summary>
+            <value>An <see cref="T:System.Xml.XmlElement"/> that contains the metadata.</value>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.Binaries">
+            <summary>
+            Gets a list of <see cref="T:Tridion.ContentManager.Publishing.Rendering.Binary"/> instances that have been added to the <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.CodePage">
+            <summary>
+            Gets and sets the code page identifier of the current <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.Content">
+            <summary>
+            Gets the content of the current <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.ChildRenderedItems">
+            <summary>
+            Gets a list of the child <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.ExecutionTime">
+            <summary>
+            Gets the time took to render this <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/>.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.ContextPublication">
+            <summary>
+            Returns the context publication of the <see cref="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.ResolvedItem"/>
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Rendering.RenderedItem.IsRenderedCompletely">
+            <summary>
+            Returns true if this <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> is finished rendering.
+            In case of a dynamic component presentation during publishing in the context of rendering a page it returns false.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.InstructionScope">
+            <summary>
+            Specifies the scopes that an instruction added to a <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> can have.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.Rendering.InstructionScope.Global">
+            <summary>
+            Instruction can be processed at package level.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.Rendering.InstructionScope.Local">
+            <summary>
+            Instruction can be processed at <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderedItem"/> level.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.RenderEngine">
+            <summary>
+            The egine that is responsible for rendering <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderEngine.Render(Tridion.ContentManager.Publishing.Resolving.ResolvedItem,Tridion.ContentManager.Publishing.PublishInstruction,Tridion.ContentManager.CommunicationManagement.PublicationTarget,Tridion.ContentManager.Publishing.Rendering.RenderContext)">
+            <summary>
+            Renders the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> according to the <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> and the <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.
+            </summary>
+            <param name="resolvedItem">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> to render.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> needed by the renderer.</param>
+            <param name="target">Render the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> for this <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/></param>
+            <param name="context">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/> that is transfered between renderers.</param>
+            <returns>The result of the render action.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderEngine.Render(Tridion.ContentManager.Publishing.Resolving.ResolvedItem,Tridion.ContentManager.Publishing.PublishInstruction,Tridion.ContentManager.CommunicationManagement.PublicationTarget)">
+            <summary>
+            Renders the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> according to the <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> and the <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.
+            </summary>
+            <param name="resolvedItem">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> to render.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> needed by the renderer.</param>
+            <param name="target">Render the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> for this <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/></param>
+            <returns>The result of the render action.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderEngine.Render(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.CommunicationManagement.Template,Tridion.ContentManager.Publishing.PublishInstruction,Tridion.ContentManager.CommunicationManagement.PublicationTarget,Tridion.ContentManager.Publishing.Rendering.RenderContext)">
+            <summary>
+            Renders the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> with the <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> according to the <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> and the <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to render.</param>
+            <param name="template">Render the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> with this <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/></param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> needed by the renderer.</param>
+            <param name="target">Render the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> with the <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> for this <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/></param>
+            <param name="context">The <see cref="T:Tridion.ContentManager.Publishing.Rendering.RenderContext"/> that is transfered between renderers.</param>
+            <returns>The result of the render action.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderEngine.Render(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.CommunicationManagement.Template,Tridion.ContentManager.Publishing.PublishInstruction,Tridion.ContentManager.CommunicationManagement.PublicationTarget)">
+            <summary>
+            Renders the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> with the <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> according to the <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> and the <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to render.</param>
+            <param name="template">Render the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> with this <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/></param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> needed by the renderer.</param>
+            <param name="target">Render the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> with the <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> for this <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/></param>
+            <returns>The result of the render action.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderEngine.GetRenderersFromConfiguration(Tridion.ContentManager.Publishing.Resolving.ResolvedItem)">
+            <summary>
+            Gets the renderers from the configuration based on the item type and the type of the template.
+            </summary>
+            <param name="resolvedItem">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> used for getting the renderers from the configuration.</param>
+            <returns>A collection of renderes.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderEngine.UpdateSessionForRendering(Tridion.ContentManager.Session,Tridion.ContentManager.Publishing.PublishInstruction,Tridion.ContentManager.CommunicationManagement.PublicationTarget)">
+            <summary>
+            Updates the <see cref="T:Tridion.ContentManager.Session"/> to support rendering of items that are checked out and/or are in workflow.
+            </summary>
+            <param name="session">The <see cref="T:Tridion.ContentManager.Session"/> to update.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.PublishInstruction"/> needed by the renderer.</param>
+            <param name="target">Use the <see cref="T:Tridion.ContentManager.Workflow.ApprovalStatus"/> of this <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/> for rendering.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.RenderEngine.CreateVersionZeroLessUri(Tridion.ContentManager.TcmUri)">
+            <summary>
+            Create a TcmUri without a version.
+            </summary>
+            <param name="uri">A TcmUri with or without a version.</param>
+            <returns>A TcmUri without a version.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.TcdlBinaryLink">
+            <summary>
+            Class to represent TCDL link to an item of type binary. Subclassed from <see cref="T:Tridion.ContentManager.Publishing.Rendering.TcdlLink"/>.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.TcdlLink">
+            <summary>
+            Base class to represent TCDL links
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.Rendering.TcdlLink._addAnchor">
+            <summary>
+            Represents addAnchor attribute of a link
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.Rendering.TcdlLink._destination">
+            <summary>
+            Represents destination attribute of a link
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.Rendering.TcdlLink._linkAttributes">
+            <summary>
+            Represents custom attributes of a link
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.Rendering.TcdlLink._linkText">
+            <summary>
+            Represents inner text of a link
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.Rendering.TcdlLink._textOnFail">
+            <summary>
+            Represents textOnFailure attribute of a link
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.TcdlLink.#ctor(System.Boolean,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Base constructor
+            </summary>
+            <param name="addAnchor"> is a Boolean value that indicates if anchor must be added to output tag.</param>
+            <param name="destination"> is a string that contains id of the item to link to.</param>
+            <param name="linkAttributes"> is a string with attributes of the link.</param>
+            <param name="linkText"> is a string that contains visible text of the link.</param>
+            <param name="textOnFail"> is a Boolean value that contiains value for attribute textOnFailure.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.TcdlBinaryLink.#ctor(System.Boolean,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Constructs an object representing TSDL link with attribute type='Binary'
+            </summary>
+            <param name="addAnchor"> is a Boolean value that indicates if anchor must be added to output tag.</param>
+            <param name="destination"> is a string that contains id of the item to link to.</param>
+            <param name="linkAttributes"> is a string with attributes of the link.</param>
+            <param name="linkText"> is a string that contains visible text of the link.</param>
+            <param name="textOnFail"> is a Boolean value that contiains value for attribute textOnFailure.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.TcdlBinaryLink.ToString">
+            <summary>
+            Outputs the link as an XML element.
+            </summary>
+            <returns>String containing XML representation of the link.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.TcdlComponentLink">
+            <summary>
+            Class to represent TCDL link to an item of type Component. Subclassed from <see cref="T:Tridion.ContentManager.Publishing.Rendering.TcdlLink"/>.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.TcdlComponentLink.#ctor(System.Boolean,System.String,System.String,System.String,System.Boolean,System.String,Tridion.ContentManager.CommunicationManagement.Template)">
+            <summary>
+            Constructs an object representing TSDL link with attribute type='Component'
+            </summary>
+            <param name="addAnchor"> is a Boolean value that indicates if anchor must be added to output tag.</param>
+            <param name="destination"> is a string that contains id of the item to link to.</param>
+            <param name="linkAttributes"> is a string with attributes of the link.</param>
+            <param name="linkText"> is a string that contains visible text of the link.</param>
+            <param name="textOnFail"> is a Boolean value that contiains value for attribute textOnFailure.</param>
+            <param name="origin"> is a sting that contiains value for attribute 'origin'.</param>
+            <param name="template"> refers to <see cref="T:Tridion.ContentManager.CommunicationManagement.Template"/> on which component is based.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.TcdlComponentLink.ToString">
+            <summary>
+            Outputs the link as an XML element.
+            </summary>
+            <returns>String containing XML representation of the link.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Rendering.TcdlPageLink">
+            <summary>
+            Class to represent TCDL link to an item of type page. Subclassed from <see cref="T:Tridion.ContentManager.Publishing.Rendering.TcdlLink"/>.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.TcdlPageLink.#ctor(System.Boolean,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Constructs an object representing TSDL link with attribute type='Page'
+            </summary>
+            <param name="addAnchor"> is a Boolean value that indicates if anchor must be added to output tag.</param>
+            <param name="destination"> is a string that contains id of the item to link to.</param>
+            <param name="linkAttributes"> is a string with attributes of the link.</param>
+            <param name="linkText"> is a string that contains visible text of the link.</param>
+            <param name="textOnFail"> is a Boolean value that contiains value for attribute textOnFailure.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Rendering.TcdlPageLink.ToString">
+            <summary>
+            Outputs the link as an XML element.
+            </summary>
+            <returns>String containing XML representation of the link.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.RenderInstruction">
+            <summary>
+            Represents the instructions needed for rendering.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.RenderInstruction.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/>.
+            </summary>
+            <remarks>A class that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable"/> interface must have a 
+            parameterless constructor. This is a requirement of the <see cref="T:System.Xml.Serialization.XmlSerializer"/> class.</remarks>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.RenderInstruction.System#Xml#Serialization#IXmlSerializable#GetSchema">
+            <summary>
+            This property is reserved.
+            </summary>
+            <returns>A <c>null</c> reference.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.RenderInstruction.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> from its XML representation. 
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.RenderInstruction.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts this <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> into its XML representation.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> is serialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.RenderInstruction.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> from its XML representation. 
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.RenderInstruction.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts this <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> into its XML representation.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/> is serialized.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.RenderInstruction.RenderMode">
+            <summary>
+            Gets and sets the <see cref="P:Tridion.ContentManager.Publishing.RenderInstruction.RenderMode"/> used when rendering.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.RenderInstruction.BinaryStoragePath">
+            <summary>
+            Gets and sets the path where the binaries are stored during rendering.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.RenderMode">
+            <summary>
+            Identifies the type of render mode to be used during rendering.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.RenderMode.Publish">
+            <summary>
+            Use the publish mode when publishing an identifiable object.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.RenderMode.PreviewStatic">
+            <summary>
+            Use the preview static mode when previewing the latest checked in version of an identifiable object.
+            </summary>
+        </member>
+        <member name="F:Tridion.ContentManager.Publishing.RenderMode.PreviewDynamic">
+            <summary>
+            Use the preview dynamic mode when previewing the current version of an identifiable object.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping">
+            <summary>
+            Represents a mapping between an <see cref="T:Tridion.ContentManager.IdentifiableObject"/> and its resolvers within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> class.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping.#ctor(Tridion.ContentManager.IdentifiableObject)">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> class.
+            </summary>
+            <param name="item">Get the item type from the <see cref="T:Tridion.ContentManager.IdentifiableObject"/>.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping.ItemType">
+            <summary>
+            Gets and sets the item type of the resolve mapping.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping.Resolvers">
+            <summary>
+            Gets the resolvers for the specified item type.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings">
+            <summary>
+            Represents a collection of mappings between an <see cref="T:Tridion.ContentManager.IdentifiableObject"/> and its resolvers within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings.CreateNewElement">
+            <summary>
+            Creates a new <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/>.
+            </summary>
+            <returns>A new <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/>.
+            </summary>
+            <param name="element">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> to get.</param>
+            <returns>An Object that acts as the key for the specified ResourceElement.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings.Add(Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> to the resolve mappings collection.
+            </summary>
+            <param name="resolveMapping">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings.BaseAdd(System.Configuration.ConfigurationElement)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> to a collection of <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings"/>.
+            </summary>
+            <param name="resource">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings.Remove(Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping)">
+            <summary>
+            Removes a <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> from the collection.
+            </summary>
+            <param name="resolveMapping">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> to remove.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings.RemoveAt(System.Int32)">
+            <summary>
+            Removes the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> at the specified index location.
+            </summary>
+            <param name="index">The index location of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> to remove.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings.CollectionType">
+            <summary>
+            Gets the type of the resolve mappings collection.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMappings.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> at the specified index location. 
+            </summary>
+            <param name="index">The index location of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> to get.</param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolveMapping"/> at the specified index.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver">
+            <summary>
+            Represents a resolver within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> class.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> class.
+            </summary>
+            <param name="type">The class name responsible for the resolving.</param>
+            <param name="assembly">The name of the assembly.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver.Type">
+            <summary>
+            Gets and sets the type of the class responsible for the resolving.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver.Assembly">
+            <summary>
+            Gets and sets the assembly of that contains the resolver
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers">
+            <summary>
+            Represents a collection of resolvers within a configuration file.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers.CreateNewElement">
+            <summary>
+            Creates a new <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/>.
+            </summary>
+            <returns>A new <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/>.
+            </summary>
+            <param name="resolver">Get this <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/>.</param>
+            <returns>An Object that acts as the key for the specified <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers.Add(Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers"/> to a collection of <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers"/>.
+            </summary>
+            <param name="resolver">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers.BaseAdd(System.Configuration.ConfigurationElement)">
+            <summary>
+            Adds a <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> to a collection of <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers"/>.
+            </summary>
+            <param name="resolver">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> to add.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers.Remove(Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver)">
+            <summary>
+            Removes a <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers"/> from the collection of <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers"/>.
+            </summary>
+            <param name="resolver">The <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> to remove.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers.RemoveAt(System.Int32)">
+            <summary>
+            Removes the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> at the specified index location.
+            </summary>
+            <param name="index">The index location of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> to remove.</param>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers.CollectionType">
+            <summary>
+            Gets the type of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers"/> collection.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolvers.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> at the specified index location. 
+            </summary>
+            <param name="index">The index location of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> to get.</param>
+            <returns>A <see cref="T:Tridion.ContentManager.Publishing.Resolving.Configuration.Resolver"/> at the specified index.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolvingConfiguration">
+            <summary>
+            Represents the resolving section within a configuration file.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolvingConfiguration.Mappings">
+            <summary>
+            Gets and sets the resolving mappings.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.Configuration.ResolvingConfiguration.SectionName">
+            <summary>
+            Use this section name to get the resolving configuration from the <see cref="T:System.Configuration.ConfigurationManager"/>
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.IResolver">
+            <summary>
+            Defines the methods to resolve items.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.IResolver.Resolve(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.Publishing.ResolveInstruction,Tridion.ContentManager.Publishing.PublishContext,Tridion.Collections.ISet{Tridion.ContentManager.Publishing.Resolving.ResolvedItem})">
+            <summary>
+            Get the list of <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> to (re-/un-)publish for a given <see cref="T:Tridion.ContentManager.IdentifiableObject"/> and <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to resolve.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.ResolveInstruction"/>.</param>
+            <param name="context">The <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> the resolving must be done.</param>
+            <param name="resolvedItems">The result of previous resolve actions. Add the result to this list.</param>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem">
+            <summary>
+            Represents a combination of a <see cref="T:Tridion.ContentManager.IdentifiableObject"/> and a <see cref="P:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.Template"/>.
+            This combination is the result of a resolve action and can be used to render this combination.
+            It is allowed to have null as the template
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.#ctor(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.CommunicationManagement.Template)">
+            <summary>
+            Creates a new instance of the <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> class.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/></param>
+            <param name="template">Render the item with this <see cref="P:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.Template"/>.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.Equals(Tridion.ContentManager.Publishing.Resolving.ResolvedItem)">
+            <summary>
+            Indicates whether the current <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> is equal to another <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/>.
+            Version zero is considered the same as a version less Uri.
+            </summary>
+            <param name="other">An <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> to compare with this <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/>.</param>
+            <returns>True if the current <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> is equal to the other parameter; otherwise, false.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.ToString">
+            <summary>
+            Returns the item Id and the template Id if exists.
+            </summary>
+            <returns>A string containing the item Id and the template Id if exists.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.CreateVersionZeroLessUri(Tridion.ContentManager.TcmUri)">
+            <summary>
+            Create a TcmUri without a version if the version number is zero.
+            </summary>
+            <param name="uri">A TcmUri with or without a version.</param>
+            <returns>A TcmUri without a version zero.</returns>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.Item">
+            <summary>
+            Gets the <see cref="T:Tridion.ContentManager.IdentifiableObject"/> part.
+            </summary>
+        </member>
+        <member name="P:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.Template">
+            <summary>
+            Gets the <see cref="P:Tridion.ContentManager.Publishing.Resolving.ResolvedItem.Template"/> part.
+            </summary>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.Resolving.ResolveEngine">
+            <summary>
+            The egine that is responsible for resolving <see cref="T:Tridion.ContentManager.IdentifiableObject"/>s.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolveEngine.ResolveItem(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.Publishing.ResolveInstruction,Tridion.ContentManager.Publishing.PublishContext)">
+            <summary>
+            Gets a list of <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/> to be (un-/re-)published to given <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> if an (un-/re-)publish action is performed on this item.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to resolve.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/>.</param>
+            <param name="context">The <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> the resolving must be done.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.Resolving.ResolvedItem"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolveEngine.ResolvePublishContext(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.Publishing.ResolveInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.PublicationTarget})">
+            <summary>
+            Gets a list of <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> to where the the given item should be (un-/re-)published based on the list of <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to resolve.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/>.</param>
+            <param name="publicationTargets">A enumeration of <see cref="T:Tridion.ContentManager.CommunicationManagement.PublicationTarget"/>.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolveEngine.ResolvePublishContext(Tridion.ContentManager.IdentifiableObject,Tridion.ContentManager.Publishing.ResolveInstruction,System.Collections.Generic.IEnumerable{Tridion.ContentManager.CommunicationManagement.TargetType})">
+            <summary>
+            Gets a list of <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/> to where the the given item should be (un-/re-)published based on the list of <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/>.
+            </summary>
+            <param name="item">The <see cref="T:Tridion.ContentManager.IdentifiableObject"/> to resolve.</param>
+            <param name="instruction">The <see cref="T:Tridion.ContentManager.Publishing.RenderInstruction"/>.</param>
+            <param name="targetTypes">A enumeration of <see cref="T:Tridion.ContentManager.CommunicationManagement.TargetType"/>.</param>
+            <returns>A collection of <see cref="T:Tridion.ContentManager.Publishing.PublishContext"/>.</returns>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.Resolving.ResolveEngine.GetResolversFromConfiguration(Tridion.ContentManager.IdentifiableObject)">
+            <summary>
+            Gets the resolvers from the configuration based on the item type.
+            </summary>
+            <param name="item">Get the resolvers for this <see cref="T:Tridion.ContentManager.IdentifiableObject"/>.</param>
+            <returns>A collection of resolvers.</returns>
+        </member>
+        <member name="T:Tridion.ContentManager.Publishing.UnPublishInstruction">
+            <summary>
+            Represents the instructions needed for unpublishing an <see cref="T:Tridion.ContentManager.IdentifiableObject"/>.
+            </summary>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.UnPublishInstruction.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:Tridion.ContentManager.Publishing.UnPublishInstruction"/> from its XML representation. 
+            </summary>
+            <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the <see cref="T:Tridion.ContentManager.Publishing.UnPublishInstruction"/> is deserialized.</param>
+        </member>
+        <member name="M:Tridion.ContentManager.Publishing.UnPublishInstruction.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts this <see cref="T:Tridion.ContentManager.Publishing.UnPublishInstruction"/> into its XML representation.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the <see cref="T:Tridion.ContentManager.Publishing.UnPublishInstruction"/> is serialized.</param>
+        </member>
+    </members>
+</doc>

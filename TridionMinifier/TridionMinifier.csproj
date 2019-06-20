@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7C70FF89-6540-438C-813D-30539747BEBE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TridionMinifier</RootNamespace>
+    <AssemblyName>TridionMinifier</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tridion.Common, Version=2.0.139.0, Culture=neutral, PublicKeyToken=349a39f202fa9b53, processorArchitecture=MSIL" />
+    <Reference Include="Tridion.ContentManager, Version=5.4.0.509, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL" />
+    <Reference Include="Tridion.ContentManager.Publishing, Version=5.4.0.509, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL" />
+    <Reference Include="Tridion.ContentManager.Templating, Version=5.4.0.509, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EcmaScript.NET\Arguments.cs" />
+    <Compile Include="EcmaScript.NET\Attributes\EcmaScriptClassAttribute.cs" />
+    <Compile Include="EcmaScript.NET\Attributes\EcmaScriptFunctionAttribute.cs" />
+    <Compile Include="EcmaScript.NET\Attributes\EcmaScriptPropertyAccess.cs" />
+    <Compile Include="EcmaScript.NET\Attributes\EcmaScriptPropertyAttribute.cs" />
+    <Compile Include="EcmaScript.NET\BaseFunction.cs" />
+    <Compile Include="EcmaScript.NET\Collections\ObjArray.cs" />
+    <Compile Include="EcmaScript.NET\Collections\ObjToIntMap.cs" />
+    <Compile Include="EcmaScript.NET\Collections\UintMap.cs" />
+    <Compile Include="EcmaScript.NET\CompilerEnvirons.cs" />
+    <Compile Include="EcmaScript.NET\Context.cs" />
+    <Compile Include="EcmaScript.NET\ContextEvents.cs" />
+    <Compile Include="EcmaScript.NET\ContextFactory.cs" />
+    <Compile Include="EcmaScript.NET\Continuation.cs" />
+    <Compile Include="EcmaScript.NET\Debugging\DebugFrame.cs" />
+    <Compile Include="EcmaScript.NET\Debugging\DebuggableObject.cs" />
+    <Compile Include="EcmaScript.NET\Debugging\DebuggableScript.cs" />
+    <Compile Include="EcmaScript.NET\Debugging\Debugger.cs" />
+    <Compile Include="EcmaScript.NET\Decompiler.cs" />
+    <Compile Include="EcmaScript.NET\DefaultErrorReporter.cs" />
+    <Compile Include="EcmaScript.NET\Delegator.cs" />
+    <Compile Include="EcmaScript.NET\EcmaScriptError.cs" />
+    <Compile Include="EcmaScript.NET\EcmaScriptException.cs" />
+    <Compile Include="EcmaScript.NET\EcmaScriptRuntimeException.cs" />
+    <Compile Include="EcmaScript.NET\EcmaScriptThrow.cs" />
+    <Compile Include="EcmaScript.NET\ErrorReporter.cs" />
+    <Compile Include="EcmaScript.NET\FunctionNode.cs" />
+    <Compile Include="EcmaScript.NET\Helpers\CliHelper.cs" />
+    <Compile Include="EcmaScript.NET\Helpers\StackOverflowVerifier.cs" />
+    <Compile Include="EcmaScript.NET\Helpers\StackOverflowVerifierException.cs" />
+    <Compile Include="EcmaScript.NET\ICallable.cs" />
+    <Compile Include="EcmaScript.NET\IdEnumeration.cs" />
+    <Compile Include="EcmaScript.NET\IdFunctionObject.cs" />
+    <Compile Include="EcmaScript.NET\IdScriptableObject.cs" />
+    <Compile Include="EcmaScript.NET\IFunction.cs" />
+    <Compile Include="EcmaScript.NET\IIdEnumerable.cs" />
+    <Compile Include="EcmaScript.NET\IIdFunctionCall.cs" />
+    <Compile Include="EcmaScript.NET\InterpretedFunction.cs" />
+    <Compile Include="EcmaScript.NET\Interpreter.cs" />
+    <Compile Include="EcmaScript.NET\InterpreterData.cs" />
+    <Compile Include="EcmaScript.NET\IRef.cs" />
+    <Compile Include="EcmaScript.NET\IRefCallable.cs" />
+    <Compile Include="EcmaScript.NET\IScript.cs" />
+    <Compile Include="EcmaScript.NET\IScriptable.cs" />
+    <Compile Include="EcmaScript.NET\Node.cs" />
+    <Compile Include="EcmaScript.NET\NodeFactory.cs" />
+    <Compile Include="EcmaScript.NET\NodeTransformer.cs" />
+    <Compile Include="EcmaScript.NET\Parser.cs" />
+    <Compile Include="EcmaScript.NET\RegExpProxy.cs" />
+    <Compile Include="EcmaScript.NET\ScriptableObject.cs" />
+    <Compile Include="EcmaScript.NET\ScriptConvert.cs" />
+    <Compile Include="EcmaScript.NET\ScriptOrFnNode.cs" />
+    <Compile Include="EcmaScript.NET\ScriptRuntime.cs" />
+    <Compile Include="EcmaScript.NET\SecurityController.cs" />
+    <Compile Include="EcmaScript.NET\SpecialRef.cs" />
+    <Compile Include="EcmaScript.NET\Token.cs" />
+    <Compile Include="EcmaScript.NET\TokenStream.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinArray.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinBoolean.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinCall.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinDate.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinError.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinFunction.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinGlobal.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinGlobalObject.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinMath.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinNumber.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinObject.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinScript.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinString.cs" />
+    <Compile Include="EcmaScript.NET\Types\BuiltinWith.cs" />
+    <Compile Include="EcmaScript.NET\Types\Cli\CliArray.cs" />
+    <Compile Include="EcmaScript.NET\Types\Cli\CliEnum.cs" />
+    <Compile Include="EcmaScript.NET\Types\Cli\CliEventInfo.cs" />
+    <Compile Include="EcmaScript.NET\Types\Cli\CliMethodInfo.cs" />
+    <Compile Include="EcmaScript.NET\Types\Cli\CliObject.cs" />
+    <Compile Include="EcmaScript.NET\Types\Cli\CliPackage.cs" />
+    <Compile Include="EcmaScript.NET\Types\Cli\CliType.cs" />
+    <Compile Include="EcmaScript.NET\Types\E4X\Namespace.cs" />
+    <Compile Include="EcmaScript.NET\Types\E4X\QName.cs" />
+    <Compile Include="EcmaScript.NET\Types\E4X\XML.cs" />
+    <Compile Include="EcmaScript.NET\Types\E4X\XMLCtor.cs" />
+    <Compile Include="EcmaScript.NET\Types\E4X\XMLLibImpl.cs" />
+    <Compile Include="EcmaScript.NET\Types\E4X\XMLList.cs" />
+    <Compile Include="EcmaScript.NET\Types\E4X\XMLName.cs" />
+    <Compile Include="EcmaScript.NET\Types\E4X\XMLObjectImpl.cs" />
+    <Compile Include="EcmaScript.NET\Types\RegExp\BuiltinRegExp.cs" />
+    <Compile Include="EcmaScript.NET\Types\RegExp\BuiltinRegExpCtor.cs" />
+    <Compile Include="EcmaScript.NET\Types\RegExp\RegExpImpl.cs" />
+    <Compile Include="EcmaScript.NET\Types\RegExp\SubString.cs" />
+    <Compile Include="EcmaScript.NET\Undefined.cs" />
+    <Compile Include="EcmaScript.NET\UniqueTag.cs" />
+    <Compile Include="EcmaScript.NET\Wrapper.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\CssCompressionType.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\CssCompressor.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\CustomErrorReporter.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\Extensions.cs" />
+    <Compile Include="Minifier.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\ICompressorTask.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\JavaScriptCompressor.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\JavaScriptIdentifier.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\JavaScriptToken.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\MichaelAshRegexCompressor.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\ScriptOrFunctionScope.cs" />
+    <Compile Include="Yahoo.Yui.Compressor\YUICompressor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dependencies\TcmUploadAssembly.exe" />
+    <Content Include="Dependencies\Tridion.Common.dll" />
+    <Content Include="Dependencies\Tridion.ContentManager.dll" />
+    <Content Include="Dependencies\Tridion.ContentManager.Publishing.dll" />
+    <Content Include="Dependencies\Tridion.ContentManager.Templating.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EcmaScript.NET\Resources\LICENSE" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
