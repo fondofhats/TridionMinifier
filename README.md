@@ -1,1 +1,1 @@
-# TridionMinifier
+# Tridion CSS and JavaScript Minifier
